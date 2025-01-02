@@ -16,7 +16,7 @@ const ScrollToTop = () => {
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/InvoEase/">
       <ScrollToTop />
       <App />
     </BrowserRouter>
