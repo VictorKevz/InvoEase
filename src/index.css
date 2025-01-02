@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=League+Spartan:wght@100..900&display=swap");
+:root {
+  /* Primary Colors */
+  --primary-color: #7c5dfa; /* Vibrant Purple */
+  --secondary-color: #9277ff; /* Lighter Purple */
+  --dark-bg: #1e2139; /* Dark Background */
+  --dark-alt: #252945; /* Alternate Dark Background */
+
+  /* Neutral Colors */
+  --neutral-light: #dfe3fa; /* Light Neutral */
+  --neutral-dark: #888eb0; /* Dark Neutral */
+  --accent-purple: #7e88c3; /* Accent Purple */
+  --accent-black: #0c0e16; /* Almost Black */
+  --white: #ffffff; /* White */
+  /* Accent Colors */
+  --error-red: #ec5757; /* Error/Alert Red */
+  --highlight-pink: #ffad9d; /* Highlight Pink */
+  --light-bg: #f8f8fb; /* Light Background */
+  --dark-card-bg: #141625; /* Dark Card Background */
+}
+
+/* Light Theme Overrides */
+.light {
+  --primary-color: #252945; /* Adjusted Dark Text for Light Theme */
+  --secondary-color: #f8f8fb; /* Light Background for Light Theme */
+  --dark-bg: #ffffff; /* White Background */
+  --dark-alt: #f8f9fa; /* Light Alt Background */
+
+  /* Neutral Colors */
+  --neutral-light: #7e88c3; /* Muted Neutral Text */
+  --neutral-dark: #141625; /* Darker Neutral for Shadows */
+  --white: #ffffff; /* White */
+
+  /* Accent Colors */
+  --error-red: #ec5757; /* Same for Error */
+  --highlight-pink: #ffad9d; /* Same for Highlights */
+  --light-bg: #ffffff; /* White Background */
+  --dark-card-bg: #f0f0f0; /* Slightly Grey Card Background */
+}
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: var(--dark-card-bg);
+  color: var(--white);
+}
+button,
+fieldset,
+input {
+  border: none;
+  outline: none;
+  background-color: inherit;
+  cursor: pointer;
+}
+button,a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+button,
+fieldset,
+input:focus {
+  outline: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}

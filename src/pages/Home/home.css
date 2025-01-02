@@ -1,0 +1,109 @@
+.home-wrapper {
+  
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  padding: 2rem 1.5rem;
+}
+.home-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.home-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.home-title {
+  font-size: clamp(2rem, 5.5vw, 3.8rem);
+  font-weight: 700;
+  margin-bottom: .65rem;
+  max-width: 610px;
+  line-height: 1.25;
+}
+.home-parag{
+    max-width: 560px;
+    font-size: 1.2rem;
+}
+.mark {
+  color: var(--secondary-color);
+}
+
+.home-features {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 3rem;
+  width: 100%;
+}
+.feature-title{
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.feature-card-wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    place-content: center;
+    margin-top: 2rem;
+}
+.feature-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: 1.5rem 1rem;
+    border-radius: 1.25rem;
+    background-color: var(--dark-bg);
+    box-shadow: 0 0 1rem rgba(127, 89, 222, 0.088);
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+}
+.feature-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 0 1rem rgba(72, 42, 148, 0.2);
+    cursor: pointer;
+}
+.feature-card-icon-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-black);
+    border-radius: 50%;
+    padding: .5rem;
+    position: absolute;
+    top: -2.375rem;
+}
+.feature-icon{
+    width: 60px;
+}
+.feature-card-title{
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2rem;
+}
+
+.feature-link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+    height: 2.5rem;
+    padding: 0 1rem;
+    border-radius: 1.25rem;
+
+}
