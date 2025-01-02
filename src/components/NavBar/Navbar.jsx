@@ -8,7 +8,7 @@ import "./navbar.css";
 function Navbar() {
   const navLinks = [
     { title: "Home", path: "/", icon: Home },
-    { title: "Portal", path: "/invoices", icon: Receipt },
+    { title: "Portal", path: "/portal", icon: Receipt },
   ];
   const { current } = useParams();
   const isSettings = current === "settings";

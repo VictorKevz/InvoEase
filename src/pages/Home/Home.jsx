@@ -9,7 +9,7 @@ function Home() {
   return (
     <AnimatePresence mode="wait">
     <motion.section 
-    className="home-wrapper"
+    className="wrapper home"
     variants={pageVariants}
     initial="initial"
     animate="visible"

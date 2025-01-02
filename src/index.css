@@ -12,9 +12,12 @@
   --accent-purple: #7e88c3; /* Accent Purple */
   --accent-black: #0c0e16; /* Almost Black */
   --white: #ffffff; /* White */
+  
   /* Accent Colors */
   --error-red: #ec5757; /* Error/Alert Red */
   --highlight-pink: #ffad9d; /* Highlight Pink */
+  --green:#33D69F;
+  --orange:#FF8F00;
   --light-bg: #f8f8fb; /* Light Background */
   --dark-card-bg: #141625; /* Dark Card Background */
 }
@@ -61,11 +64,8 @@ button,a {
   align-items: center;
   justify-content: center;
 }
-button,
-fieldset,
-input:focus {
-  outline: none;
-}
+
+
 a {
   text-decoration: none;
   color: inherit;
@@ -73,4 +73,7 @@ a {
 p {
   font-size: 1.1rem;
   line-height: 1.5;
+}
+li {
+  list-style: none;
 }

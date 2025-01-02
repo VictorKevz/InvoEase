@@ -31,7 +31,7 @@ const Settings = () => {
   ]);
   return (
     <motion.section 
-    className="settings-wrapper "
+    className="wrapper settings"
     variants={pageVariants}
             initial="initial"
             animate="visible"
