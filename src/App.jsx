@@ -7,11 +7,21 @@ import Home from "./pages/Home/Home";
 import { useTranslation } from "react-i18next";
 import Settings from "./pages/Settings/Settings";
 import Portal from "./pages/Portal/Portal";
+import DetailsInvoicePage from "./pages/DetailedInvoice/DetailsInvoicePage";
+import { tr } from "framer-motion/client";
 
 export const DataContext = createContext();
 const formReducer = (state, action) => {
   switch (action.type) {
-    case value:
+    case "SHOW_FORM":
+      return { ...state, showForm: true };
+    case "UPDATE_COMPANY":
+      const { name, value,file } = action.payload;
+      return {
+        ...state,
+        company: { ...state.company, [name]: name === "logo" ? file : value },
+        companyValid: { ...state.companyValid, [name]: true },
+      };
 
     default:
       state;
@@ -31,15 +41,12 @@ const invoiceReducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_STATUS":
       const { filter } = action.payload;
-      const existingStatus = state.status.includes(filter);
-      if (existingStatus) {
-        return {
-          ...state,
-          status: state.status.filter((status) => status !== filter),
-          
-        };
-      }
-      return { ...state, status: [...state.status, filter]};
+      return {
+        ...state,
+        status: state.status.includes(filter)
+          ? state.status.filter((status) => status !== filter)
+          : [...state.status, filter],
+      };
     case "TOGGLE_STATUS":
       return { ...state, showStatus: !state.showStatus };
     default:
@@ -49,10 +56,66 @@ const invoiceReducer = (state, action) => {
 function App() {
   // FORM STATE DECLARATION...................................................
   const initialFormData = {
-    company: {},
-    client: {},
-    project: {},
-    items: [],
+    company: {
+      name: "",
+      address: "",
+      city: "",
+      postCode: "",
+      country: "",
+      email: "",
+      phone: "",
+      logo: "",
+      companyValid: {
+        name: true,
+        address: true,
+        city: true,
+        postCode: true,
+        country: true,
+        email: true,
+        phone: true,
+        logo: true,
+      },
+    },
+    client: {
+      name: "",
+      email: "",
+      address: "",
+      city: "",
+      postCode: "",
+      country: "",
+      phone: "",
+      avatar: "",
+      clientValid: {
+        name: true,
+        email: true,
+        address: true,
+        city: true,
+        postCode: true,
+        country: true,
+        phone: true,
+      },
+    },
+    project: {
+      name: "",
+      description: "",
+      paymentTerms: "",
+      status: "pending",
+    },
+    items: [
+      {
+        id: 1,
+        name: "",
+        quantity: "",
+        price: "",
+        total: "",
+        itemValid: {
+          name: true,
+          quantity: true,
+          price: true,
+        },
+      },
+    ],
+    showForm: false,
   };
   const [form, dispatchForm] = useReducer(formReducer, initialFormData);
   // FORM STATE DECLARATION...................................................
@@ -67,6 +130,7 @@ function App() {
     invoiceData: savedData || data,
     status: ["draft", "pending", "paid"],
     showStatus: false,
+    clients: [],
   };
   const [invoice, dispatchInvoice] = useReducer(
     invoiceReducer,
@@ -75,6 +139,9 @@ function App() {
   useEffect(() => {
     localStorage.setItem("invoiceData", JSON.stringify(invoice?.invoiceData));
   }, [invoice?.invoiceData]);
+  const filteredData = invoice?.invoiceData?.filter((obj) =>
+    invoice.status.includes(obj.status)
+  );
   // INVOICE STATE DECLARATION...............................................
   /* 
   .
@@ -110,6 +177,7 @@ function App() {
         dispatchForm,
         invoice,
         dispatchInvoice,
+        filteredData,
         t,
       }}
     >
@@ -122,6 +190,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/portal" element={<Portal />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/details/:id" element={<DetailsInvoicePage />} />
         </Routes>
       </main>
     </DataContext.Provider>

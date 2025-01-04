@@ -5,15 +5,16 @@ import { Add, KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import Filters from "../../components/Filters";
 import "./portal.css";
 import InvoiceCard from "../../components/InvoiceCard";
+import Form from "../../components/Form/Form";
 function Portal() {
-  const { invoice, dispatchInvoice } = useContext(DataContext);
-  const totalInvoices = invoice?.invoiceData?.length;
+  const { invoice, dispatchInvoice,filteredData,form,dispatchForm } = useContext(DataContext);
+  const totalInvoices = filteredData?.length;
   return (
     <section className="wrapper portal">
       <header className="portal-header">
         <div className="portal-text-wrapper">
           <h1 className="portal-title">Invoices</h1>
-          <p className="portal-parag">{`There are ${totalInvoices} total invoices`}</p>
+          <p className="portal-parag">{`There are ${totalInvoices > 0 ? totalInvoices : 0} total invoices`}</p>
         </div>
         <div className="filter-newInvoice-wrapper">
           <div className="filter-wrapper">
@@ -31,7 +32,10 @@ function Portal() {
             </button>
             {invoice.showStatus && <Filters />}
           </div>
-          <button type="button" className="new-invoice-btn">
+          <button type="button" 
+          className="new-invoice-btn"
+          onClick={() => dispatchForm({ type: "SHOW_FORM" })}
+          >
             <span className="add-icon">
               <Add />
             </span>
@@ -40,6 +44,7 @@ function Portal() {
         </div>
       </header>
       <InvoiceCard />
+      {form.showForm && <Form />}
     </section>
   );
 }

@@ -42,7 +42,7 @@ function Home() {
               </span>
               <h2 className="feature-card-title">{feature.title}</h2>
               <p className="feature-parag">{feature.parag}</p>
-              <Link to="/invoices" className="feature-link">Create Invoice</Link>
+              <Link to="/portal" className="feature-link">Create Invoice</Link>
             </div>
           ))}
         </div>

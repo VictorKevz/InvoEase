@@ -12,12 +12,12 @@
   --accent-purple: #7e88c3; /* Accent Purple */
   --accent-black: #0c0e16; /* Almost Black */
   --white: #ffffff; /* White */
-  
+
   /* Accent Colors */
   --error-red: #ec5757; /* Error/Alert Red */
   --highlight-pink: #ffad9d; /* Highlight Pink */
-  --green:#33D69F;
-  --orange:#FF8F00;
+  --green: #33d69f;
+  --orange: #ff8f00;
   --light-bg: #f8f8fb; /* Light Background */
   --dark-card-bg: #141625; /* Dark Card Background */
 }
@@ -55,16 +55,16 @@ button,
 fieldset,
 input {
   border: none;
-  outline: none;
+  outline-color: var(--accent-purple);
   background-color: inherit;
   cursor: pointer;
 }
-button,a {
+button,
+a {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 
 a {
   text-decoration: none;
