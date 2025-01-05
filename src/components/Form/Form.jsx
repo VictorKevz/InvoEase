@@ -1,6 +1,7 @@
 import React from "react";
-import Company from "./FormComponents/Company";
 import "./form.css";
+import ProfileForm from "./ProfileForm";
+import Project from "./Project";
 function Form() {
   return (
     <article className="form-wrapper">
@@ -10,7 +11,8 @@ function Form() {
           <p className="form-parag">Fill out the form to create an invoice</p>
         </header>
         <div className="form-content">
-          <Company />
+          <ProfileForm />
+          <Project />
         </div>
       </form>
     </article>

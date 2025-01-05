@@ -28,6 +28,7 @@
   flex-direction: column;
   width: 100%;
 }
+
 .form-main-title {
   font-size: 1.8rem;
   font-weight: bold;
@@ -36,6 +37,18 @@
 .form-content {
   width: 100%;
   margin-top: 2.8125rem;
+  height: 600px;
+  overflow-y: auto;
+  padding: 2rem 0;
+}
+.form-content::-webkit-scrollbar {
+  display: none;
+}
+.profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  width: 100%;
 }
 .field-heading {
   font-size: 1.25rem;
@@ -60,7 +73,7 @@
   margin-top: 0.5625rem;
   padding-left: 1.25rem;
   font-size: 0.9375rem;
-  color: var(--white);
+  color: var(--white) !important;
   font-size: bold;
   caret-color: var(--primary-color);
 }
@@ -74,13 +87,16 @@
   font-size: 0.8735rem;
   color: var(--neutral-light);
 }
-input[type="file"]::-webkit-file-upload-button {
-  visibility: hidden;
-}
+
 .field.company-field {
   width: 100%;
 }
-.company-field.logo {
+.company-field.address,
+.client-field.address {
+  grid-column: span 2;
+}
+.company-field.logo,
+.client-field.avatar {
   grid-column: span 2;
 }
 .form-label.logo {
@@ -89,6 +105,9 @@ input[type="file"]::-webkit-file-upload-button {
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
+}
+input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
 }
 .custom-file-wrapper {
   position: relative;
@@ -101,32 +120,56 @@ input[type="file"]::-webkit-file-upload-button {
 
 .file-input {
   position: absolute;
-  opacity: 1;
+  opacity: 0;
   width: 100%;
   height: 0%;
   cursor: pointer;
 }
 
 .custom-file-label {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   height: 48px;
   width: 100%;
-  background-color: var(--dark-alt);
+  border: 1px dashed var(--dark-alt);
+  /* background-color: var(--dark-alt); */
   color: var(--white);
   font-size: 0.9375rem;
-  border-radius: 2rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
   cursor: pointer;
 }
-.custom-file-label:hover {
-  background-color: var(--primary-color);
+.uploaded {
+  background-color: var(--green);
+}
+.check-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--white);
+}
+.success-icon {
+  color: var(--green);
 }
 
 .custom-file-text {
   margin-top: 0.5rem;
 }
 
-.company-field.address {
-  grid-column: span 2;
+/* ACTIVE STATES */
+.custom-file-label:not(.uploaded):hover {
+  background-color: var(--primary-color);
+}
+.input-field:hover,
+.input-field:focus {
+  border-color: var(--primary-color) !important;
+  cursor: pointer;
+  caret-color: var(--primary-color);
+  outline: none;
 }

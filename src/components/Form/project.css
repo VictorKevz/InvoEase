@@ -1,0 +1,12 @@
+.project-wrapper{
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+}
+.dropdown-field-wrapper{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+}

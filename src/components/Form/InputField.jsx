@@ -1,32 +1,48 @@
 import React, { useContext } from "react";
 import { DataContext } from "../../App";
 import "../Form/form.css";
-function InputField({ field }) {
+import { Check } from "@mui/icons-material";
+
+function InputField({ field, section }) {
   const { form, dispatchForm } = useContext(DataContext);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    const file = name === "logo" ? files[0] : null;
-    dispatchForm({ type: "UPDATE_COMPANY", payload: { name, value, file } });
+    const file = files?.[0] || null;
+    dispatchForm({
+      type: "UPDATE_PROFILE_FORM",
+      payload: { name, value, file, section },
+    });
   };
   return (
-    <label className={`form-label ${field.id}`} htmlFor={field.id}>
+    <label className={`form-label ${field.id}`} htmlFor={field.uniqueId}>
       {field.label}
       {field.type === "file" ? (
         <div className="custom-file-wrapper">
           <input
             type="file"
             name={field.id}
-            id={field.id}
+            id={field.uniqueId}
             onChange={handleChange}
             className="input-field file-input"
             accept="image/png, image/jpeg, image/jpg"
           />
-          <span className="custom-file-label">Upload your logo</span>
+          <span
+            className={`custom-file-label ${
+              form?.[section]?.[field?.id]?.name && "uploaded"
+            }`}
+          >
+            {form?.[section]?.[field?.id]?.name ? "Photo Uploaded" : "Upload Photo"}
+            {form?.[section]?.[field?.id]?.name && (
+              <span className="check-wrapper">
+                <Check className="success-icon" />
+              </span>
+            )}
+          </span>
           <span className="custom-file-text">
-            {form?.company?.logo?.name
-              ? `${form?.company?.logo?.name}`
-              : `Recommended size is 150px x 150px (optional). PNG, JPEG, JPG`}
+            {form?.[section]?.[field?.id]?.name
+              ? `${form?.[section]?.[field?.id]?.name}`
+              : `Recommended size is 150px by 150px (optional). PNG, JPEG, JPG`}
           </span>
         </div>
       ) : (
@@ -34,7 +50,7 @@ function InputField({ field }) {
           type={field.type}
           name={field.id}
           value={field.value}
-          id={field.id}
+          id={field.uniqueId}
           placeholder={field.placeholder}
           onChange={handleChange}
           className={`input-field ${field.id}`}

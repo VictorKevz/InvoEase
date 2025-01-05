@@ -8,21 +8,41 @@ import { useTranslation } from "react-i18next";
 import Settings from "./pages/Settings/Settings";
 import Portal from "./pages/Portal/Portal";
 import DetailsInvoicePage from "./pages/DetailedInvoice/DetailsInvoicePage";
-import { tr } from "framer-motion/client";
 
 export const DataContext = createContext();
 const formReducer = (state, action) => {
   switch (action.type) {
     case "SHOW_FORM":
       return { ...state, showForm: true };
-    case "UPDATE_COMPANY":
-      const { name, value,file } = action.payload;
+    case "UPDATE_PROFILE_FORM":
+      const { name, value, file, section } = action.payload;
       return {
         ...state,
-        company: { ...state.company, [name]: name === "logo" ? file : value },
-        companyValid: { ...state.companyValid, [name]: true },
+        [section]: {
+          ...state[section],
+          [name]: file || value,
+        },
+        [`${section}Valid`]: { ...state[`${section}Valid`], [name]: true },
       };
-
+      case "TOGGLE_DROPDOWN":
+        const { key } = action.payload;
+        return {
+          ...state,
+          project: {
+            ...state.project,
+            [key]: !state.project[key],
+          },
+        };
+        case "UPDATE_DROPDOWN_SELECTION":
+      const { key:projectKey, option } = action.payload;
+      return {
+        ...state,
+        project: {
+          ...state.project,
+          [projectKey]: option,
+        },
+      };
+      
     default:
       state;
   }
@@ -96,10 +116,17 @@ function App() {
       },
     },
     project: {
-      name: "",
+      invoiceDate: "",
+      paymentTerms: "Net 1 Day",
       description: "",
-      paymentTerms: "",
       status: "pending",
+      projectValid: {
+        invoiceDate: true,
+        paymentTerms: true,
+        description: true,
+      },
+      statusDropdown:false,
+      paymentTermsDropdown:false
     },
     items: [
       {

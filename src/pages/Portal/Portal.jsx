@@ -44,7 +44,7 @@ function Portal() {
         </div>
       </header>
       <InvoiceCard />
-      {form.showForm && <Form />}
+      {form?.showForm && <Form />}
     </section>
   );
 }
