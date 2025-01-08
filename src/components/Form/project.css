@@ -10,3 +10,103 @@
     gap: 1.5rem;
     margin-top: 3rem;
 }
+.dropdown{
+    width: 100%;
+    position: relative;
+}
+.dropdown-label{
+    font-size: .9375rem;
+    color: var(--neutral-light);
+    
+}
+.dropdown-header-btn{
+    width: 100%;
+    justify-content: space-between;
+    height: 48px;
+    padding: 0 1rem 0 1.25rem;
+    border: 1px solid var(--dark-alt);
+    border-radius: .5rem;
+    background-color: var(--dark-bg);
+    color: var(--white);
+    margin-top: 0.55rem;
+    position: relative;
+}
+.dropdown-list{
+    width: 100%;
+    border: 1px solid var(--dark-alt);
+    background-color: var(--dark-alt);
+    color: var(--neutral-light);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    z-index: 500;
+    margin-top: .5rem;
+    border-radius: .5rem;
+    padding: 1rem 0;
+    display: none;
+    box-shadow: 0 0 1rem rgba(4, 0, 5, 0.361);
+    
+}
+.dropdown-list.open{
+    display: flex;
+    position: absolute;
+    top: 100%;
+    z-index: 5;
+    transition: .3s ease-in-out;
+}
+.dropdown-item{
+    width: 100%;
+    cursor: pointer;
+}
+.dropdown-item:not(:last-child){
+    border-bottom: 1px solid var(--dark-bg);
+    padding-bottom: .9375rem!important;
+
+}
+.dropdown-item{
+    padding: 1rem 1.5rem;
+}
+
+.dropdown-btn{
+    font-size: .9375rem;
+    font-weight: bold;
+    color: var(--neutral-light);
+    width: 100%;
+    justify-content: flex-start;
+}
+.dropdown-btn:hover{
+    color: var(--primary-color);
+}
+
+ /* DATE STYLES.................................................. */
+
+.form-label.date{
+position: relative;
+}
+.calendar-icon{
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    pointer-events: none;
+    color:var(--accent-purple);
+}
+.input-field.invoiceDate {
+    position: relative;
+    width: 100%;
+  }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0; 
+}
+/* 
+.
+.
+ */
+  /* ITEMS STYLES.................................................. */
+.items-wrapper,.items-field{
+width: 100%;
+}
+.items-field{
+    display: grid;
+    /* grid-template-columns: ; */
+}

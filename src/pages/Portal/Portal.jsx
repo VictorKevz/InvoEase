@@ -7,19 +7,22 @@ import "./portal.css";
 import InvoiceCard from "../../components/InvoiceCard";
 import Form from "../../components/Form/Form";
 function Portal() {
-  const { invoice, dispatchInvoice,filteredData,form,dispatchForm } = useContext(DataContext);
+  const { invoice, dispatchInvoice, filteredData, form, dispatchForm } =
+    useContext(DataContext);
   const totalInvoices = filteredData?.length;
   return (
     <section className="wrapper portal">
       <header className="portal-header">
         <div className="portal-text-wrapper">
           <h1 className="portal-title">Invoices</h1>
-          <p className="portal-parag">{`There are ${totalInvoices > 0 ? totalInvoices : 0} total invoices`}</p>
+          <p className="portal-parag">{`There are ${
+            totalInvoices > 0 ? totalInvoices : 0
+          } total invoices`}</p>
         </div>
         <div className="filter-newInvoice-wrapper">
           <div className="filter-wrapper">
             <button
-            type="button"
+              type="button"
               className="filter-button"
               onClick={() => dispatchInvoice({ type: "TOGGLE_STATUS" })}
             >
@@ -32,9 +35,15 @@ function Portal() {
             </button>
             {invoice.showStatus && <Filters />}
           </div>
-          <button type="button" 
-          className="new-invoice-btn"
-          onClick={() => dispatchForm({ type: "SHOW_FORM" })}
+          <button
+            type="button"
+            className="new-invoice-btn"
+            onClick={() =>
+              dispatchForm({
+                type: "SHOW_FORM_ITEMS",
+                payload: { formKey: "showForm" },
+              })
+            }
           >
             <span className="add-icon">
               <Add />

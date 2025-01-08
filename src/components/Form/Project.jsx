@@ -3,10 +3,12 @@ import { DataContext } from "../../App";
 import DropDown from "./FormComponents/DropDown";
 import "../Form/form.css";
 import "./project.css";
+import InputField from "./InputField";
+import DatePickerMUI from "./FormComponents/DatePicker";
+
 function Project() {
   const { form } = useContext(DataContext);
   const {
-    invoiceDate,
     paymentTerms,
     status,
     description,
@@ -14,7 +16,7 @@ function Project() {
     paymentTermsDropdown,
   } = form.project;
 
-  const dropDownData = {
+  const data = {
     paymentTerms: [
       { value: "Net 1 Day", label: "Net 1 Day" },
       { value: "Net 7 Days", label: "Net 7 Days" },
@@ -26,13 +28,23 @@ function Project() {
       { value: "paid", label: "Paid" },
       { value: "draft", label: "Draft" },
     ],
+    
+    description:{
+      value:description.value,
+      label:"Project Description",
+      type:"text",
+      placeholder:"Graphic Design",
+      id:"description",
+      uniqueId:"project-description"
+    }
+
   };
 
   return (
     <div className="project-wrapper">
-      <div className="dropdown-field-wrapper">
+      <fieldset className="dropdown-field-wrapper">
         <DropDown
-          data={dropDownData.paymentTerms}
+          data={data.paymentTerms}
           isOpen={paymentTermsDropdown}
           toggleStateKey="paymentTermsDropdown"
           name="paymentTerms"
@@ -40,14 +52,16 @@ function Project() {
           caption="Payment Terms"
         />
         <DropDown
-          data={dropDownData.status}
+          data={data.status}
           isOpen={statusDropdown}
           toggleStateKey="statusDropdown"
           name="status"
           selected={status}
           caption="Status"
         />
-      </div>
+        <DatePickerMUI />
+        <InputField field={data.description} section="project" />
+        </fieldset>
     </div>
   );
 }

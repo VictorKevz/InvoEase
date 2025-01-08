@@ -40,6 +40,8 @@
   height: 600px;
   overflow-y: auto;
   padding: 2rem 0;
+  padding-bottom: 2rem;
+
 }
 .form-content::-webkit-scrollbar {
   display: none;
@@ -65,18 +67,19 @@
 
 /* INPUT FIELD STYLES.......................................... */
 .input-field:not(.input-field.file-input) {
-  background-color: var(--dark-bg);
+  background-color: var(--dark-bg)!important;
   border: 1px solid var(--dark-alt);
-  width: 100%;
-  height: 48px;
-  border-radius: 0.5rem;
-  margin-top: 0.5625rem;
-  padding-left: 1.25rem;
-  font-size: 0.9375rem;
+  width: 100%!important;
+  height: 48px!important;
+  border-radius: 0.5rem!important;
+  margin-top: 0.5625rem!important;
+  padding: 0 1rem 0 1.25rem!important;
+  font-size: 0.9375rem!important;
   color: var(--white) !important;
-  font-size: bold;
-  caret-color: var(--primary-color);
+  font-weight: bold!important;
+  caret-color: var(--primary-color)!important;
 }
+
 .input-field::placeholder {
   font-size: 1rem;
   color: var(--neutral-dark);
@@ -86,6 +89,7 @@
   width: 100%;
   font-size: 0.8735rem;
   color: var(--neutral-light);
+  position: relative;
 }
 
 .field.company-field {
@@ -161,7 +165,30 @@ input[type="file"]::-webkit-file-upload-button {
 .custom-file-text {
   margin-top: 0.5rem;
 }
-
+.form-action-btn-wrapper{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2.875rem;
+}
+.draft-send-wrapper{
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+/* ERROR STATES */
+.input-field.error-border {
+  border:1px solid var(--error-red) !important;
+  background-color: red!important;
+}
+.error-message{
+  font-size: 0.8125rem;
+  color: var(--error-red);
+  margin-top: -0.5625rem;
+  position: absolute;
+  right: 0;
+}
 /* ACTIVE STATES */
 .custom-file-label:not(.uploaded):hover {
   background-color: var(--primary-color);

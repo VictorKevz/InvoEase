@@ -31,6 +31,13 @@
 .btn.delete{
   background-color: var(--error-red)!important;
 }
-.btn.markPaid{
+.btn.markPaid,.btn.send{
   background-color: var(--primary-color)!important;
+}
+.btn.draft{
+  background-color: #373B53!important;
+}
+.btn.discard{
+  background-color: #F9FAFE!important;
+  color: var(--accent-purple)!important;
 }

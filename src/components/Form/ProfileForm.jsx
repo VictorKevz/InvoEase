@@ -21,11 +21,12 @@ function ProfileForm() {
     company: [
       {
         label: "Name",
-        id: "name", // For consistent className
-        uniqueId: "company-name", // Unique for input/label
+        id: "name", 
+        uniqueId: "company-name", 
         type: "text",
         placeholder: "Nokia",
-        value: name,
+        value: name.value,
+        
       },
       {
         label: "Email",
@@ -33,7 +34,7 @@ function ProfileForm() {
         uniqueId: "company-email",
         type: "text",
         placeholder: "info@nokia.com",
-        value: email,
+        value: email.value,
       },
       {
         label: "Address",
@@ -41,7 +42,7 @@ function ProfileForm() {
         uniqueId: "company-address",
         type: "text",
         placeholder: "Kaapelitie 4, Linnanmaa",
-        value: address,
+        value: address.value,
       },
       {
         label: "Phone",
@@ -49,7 +50,7 @@ function ProfileForm() {
         uniqueId: "company-phone",
         type: "text",
         placeholder: "+358 71 4004000",
-        value: phone,
+        value: phone.value,
       },
       {
         label: "Post Code",
@@ -57,7 +58,7 @@ function ProfileForm() {
         uniqueId: "company-postCode",
         type: "text",
         placeholder: "90650",
-        value: postCode,
+        value: postCode.value,
       },
       {
         label: "City",
@@ -65,7 +66,7 @@ function ProfileForm() {
         uniqueId: "company-city",
         type: "text",
         placeholder: "Oulu",
-        value: city,
+        value: city.value,
       },
       {
         label: "Country",
@@ -73,7 +74,7 @@ function ProfileForm() {
         uniqueId: "company-country",
         type: "text",
         placeholder: "Finland",
-        value: country,
+        value: country.value,
       },
       {
         label: "",
@@ -81,7 +82,7 @@ function ProfileForm() {
         uniqueId: "company-logo",
         type: "file",
         placeholder: "",
-        value: logo,
+        value: logo.value,
       },
     ],
     client: [
@@ -91,7 +92,7 @@ function ProfileForm() {
         uniqueId: "client-name", // Unique for input/label
         type: "text",
         placeholder: "John Doe",
-        value: clientName,
+        value: clientName.value,
       },
       {
         label: "Email",
@@ -99,7 +100,7 @@ function ProfileForm() {
         uniqueId: "client-email",
         type: "text",
         placeholder: "johndoe@example.com",
-        value: clientEmail,
+        value: clientEmail.value,
       },
       {
         label: "Address",
@@ -107,7 +108,7 @@ function ProfileForm() {
         uniqueId: "client-address",
         type: "text",
         placeholder: "123 Elm Street",
-        value: clientAddress,
+        value: clientAddress.value,
       },
       {
         label: "Phone",
@@ -115,7 +116,7 @@ function ProfileForm() {
         uniqueId: "client-phone",
         type: "text",
         placeholder: "+1 234 567 8901",
-        value: clientPhone,
+        value: clientPhone.value,
       },
       {
         label: "Post Code",
@@ -123,7 +124,7 @@ function ProfileForm() {
         uniqueId: "client-postCode",
         type: "text",
         placeholder: "12345",
-        value: clientPostCode,
+        value: clientPostCode.value,
       },
       {
         label: "City",
@@ -131,7 +132,7 @@ function ProfileForm() {
         uniqueId: "client-city",
         type: "text",
         placeholder: "New York",
-        value: clientCity,
+        value: clientCity.value,
       },
       {
         label: "Country",
@@ -139,7 +140,7 @@ function ProfileForm() {
         uniqueId: "client-country",
         type: "text",
         placeholder: "United States",
-        value: clientCountry,
+        value: clientCountry.value,
       },
       {
         label: "",
@@ -147,7 +148,7 @@ function ProfileForm() {
         uniqueId: "client-avatar",
         type: "file",
         placeholder: "",
-        value: avatar,
+        value: avatar.value,
       },
     ],
   };
@@ -167,7 +168,7 @@ function ProfileForm() {
                 key={field.id}
                 className={`field ${section}-field ${field.id}`}
               >
-                <InputField field={field} section={section} />
+                <InputField field={field} section={section} actionType="UPDATE_PROFILE_FORM" />
               </div>
             ))}
           </div>

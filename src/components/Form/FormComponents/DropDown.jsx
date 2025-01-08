@@ -1,7 +1,7 @@
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import React, { useContext } from "react";
 import { DataContext } from "../../../App";
-
+import "../form.css";
 function DropDown({ data, isOpen, toggleStateKey, name, selected, caption }) {
   const { dispatchForm } = useContext(DataContext);
   return (
@@ -17,18 +17,19 @@ function DropDown({ data, isOpen, toggleStateKey, name, selected, caption }) {
           })
         }
       >
-        {selected}
+        {selected.charAt(0).toUpperCase() + selected.slice(1)}
         {isOpen ? (
           <KeyboardArrowUp className="arrow-icon" />
         ) : (
           <KeyboardArrowDown className="arrow-icon" />
         )}
       </button>
+      <ul  className={`dropdown-list ${isOpen ? "open" : "close"}`}>
       {data.map((item) => {
         return (
           <React.Fragment key={item.value}>
             {isOpen && (
-              <ul  className="dropdown-list">
+              
                 <li className="dropdown-item">
                   <button
                     type="button"
@@ -46,11 +47,12 @@ function DropDown({ data, isOpen, toggleStateKey, name, selected, caption }) {
                     {item.label}
                   </button>
                 </li>
-              </ul>
+             
             )}
           </React.Fragment>
         );
-      })}
+      })} 
+      </ul>
     </div>
   );
 }
