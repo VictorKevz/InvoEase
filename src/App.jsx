@@ -10,6 +10,7 @@ import Portal from "./pages/Portal/Portal";
 import DetailsInvoicePage from "./pages/DetailedInvoice/DetailsInvoicePage";
 import dayjs from "dayjs";
 import { v4 as uuidv4 } from "uuid";
+import { em } from "framer-motion/client";
 
 export const DataContext = createContext();
 const formReducer = (state, action) => {
@@ -25,37 +26,43 @@ const formReducer = (state, action) => {
           ...state[section],
           [name]: {
             ...state[section][name],
-            value:file || value,
+            value: file || value,
             valid: true,
-          }
+          },
         },
       };
-      case "VALIDATE_FORM":
-        const { sectionToValidate, validationRules } = action.payload;
-        let isValid = true;
-        const updatedSection = { ...state[sectionToValidate] };
-      
-        Object.keys(updatedSection).forEach((key) => {
-          const field = updatedSection[key];
-          if (validationRules[key]) {
-            const { regex, errorMessage } = validationRules[key];
-            if (!regex.test(field.value)) {
-              field.valid = false;
-              field.errorMessage = errorMessage;
-              isValid = false;
-            }
-          } else if (field.value.trim() === "") {
+    case "VALIDATE_FORM":
+      const { sectionToValidate, validationRules } = action.payload;
+      let isValid = true;
+      const updatedSection = { ...state[sectionToValidate] };
+
+      Object.keys(updatedSection).forEach((key) => {
+        const field = updatedSection[key];
+        if (key === "logo" || key === "avatar") {
+          // Skip validation for logo and avatar
+          field.valid = true;
+          field.errorMessage = "";
+        } else if (validationRules[key]) {
+          const { regex, errorMessage } = validationRules[key];
+          if (!regex.test(field.value)) {
             field.valid = false;
-            field.errorMessage = "Can't be blank.";
+            field.errorMessage = errorMessage;
             isValid = false;
           }
-        });
-      
-        return {
-          ...state,
-          [sectionToValidate]: updatedSection,
-          formValid: isValid,
-        };  
+        } else if (field?.value?.trim() === "") {
+          field.valid = false;
+          field.errorMessage = `Invalid ${
+            key.charAt(0).toUpperCase() + key.slice(1)
+          }`;
+          isValid = false;
+        }
+      });
+
+      return {
+        ...state,
+        [sectionToValidate]: updatedSection,
+        formValid: isValid,
+      };
     case "TOGGLE_DROPDOWN":
       const { key } = action.payload;
       return {
@@ -101,7 +108,13 @@ const formReducer = (state, action) => {
             : item
         ),
       };
-
+    case "VALIDATE_ITEMS":
+      const { items } = action.payload;
+      return {
+        ...state,
+        items,
+        formValid: items.every((item) => item.valid),
+      };
     case "ADD_ITEMS":
       const uniqueId = uuidv4();
       return {
@@ -140,7 +153,8 @@ const formReducer = (state, action) => {
       return {
         ...state,
         items: state.items.filter((item) => item.id !== id),
-      };  
+      };
+
     default:
       state;
   }
@@ -167,6 +181,60 @@ const invoiceReducer = (state, action) => {
       };
     case "TOGGLE_STATUS":
       return { ...state, showStatus: !state.showStatus };
+    case "CREATE_INVOICE":
+      const { formData } = action.payload;
+      const numberOfDays = parseInt(
+        formData?.project?.paymentTerms?.match(/\d+/)?.[0]
+      );
+      return {
+        ...state,
+        invoiceData: [
+          ...state.invoiceData,
+          {
+            id: uuidv4().slice(0, 6),
+            createdAt: formData?.project?.invoiceDate,
+            paymentDue: dayjs(formData?.project?.invoiceDate)
+              .add(numberOfDays, "day")
+              .format("YYYY-MM-DD"),
+            paymentTerms: numberOfDays,
+            description: formData?.project?.description.value,
+            status: formData?.project?.status,
+            senderAddress: {
+              name: formData?.company?.name.value,
+              street: formData?.company?.address.value,
+              city: formData?.company?.city.value,
+              postCode: formData?.company?.postCode.value,
+              country: formData?.company?.country.value,
+              email: formData?.company?.email.value,
+              phone: formData?.company?.phone.value,
+              logo: formData?.company?.logo.value,
+            },
+            clientAddress: {
+              name: formData?.client?.name.value,
+              street: formData?.client?.address.value,
+              city: formData?.client?.city.value,
+              postCode: formData?.client?.postCode.value,
+              country: formData?.client?.country.value,
+              email: formData?.client?.email.value,
+              phone: formData?.client?.phone.value,
+              avatar: formData?.client?.avatar.value,
+            },
+            items: formData?.items?.map((item) => ({
+              id: item.id,
+              name: item.productName.value,
+              quantity: Number(item.quantity.value),
+              price: Number(item.price.value),
+              total: Number(item.quantity.value) * Number(item.price.value),
+            })),
+            total: formData?.items.reduce(
+              (acc, item) =>
+                acc + Number(item.quantity.value) * Number(item.price.value),
+              0
+            ),
+            clientEmails:[...state.clientEmails,formData?.client?.email?.value],
+          },
+        ],
+      };
     default:
       state;
   }
@@ -175,31 +243,34 @@ function App() {
   // FORM STATE DECLARATION...................................................
   const initialFormData = {
     company: {
-      name: { value: "", valid: true,errorMessage:"Can't be blank." },
-      address: { value: "", valid: true,errorMessage:"Can't be blank." },
+      name: { value: "", valid: true, errorMessage: "" },
+      address: { value: "", valid: true, errorMessage: "" },
       city: { value: "", valid: true },
-      postCode: { value: "", valid: true,errorMessage:"Can't be blank." },
-      country: { value: "", valid: true,errorMessage:"Can't be blank." },
-      email: { value: "", valid: true,errorMessage:"Can't be blank." },
-      phone: { value: "", valid: true,errorMessage:"Can't be blank." },
-      logo: { value: "", valid: true },
+      postCode: { value: "", valid: true, errorMessage: "" },
+      country: { value: "", valid: true, errorMessage: "" },
+      email: { value: "", valid: true, errorMessage: "" },
+      phone: { value: "", valid: true, errorMessage: "" },
+      logo: { value: "", valid: true, errorMessage: "" },
     },
     client: {
-      name: { value: "", valid: true,errorMessage:"Can't be blank." },
-      email: { value: "", valid: true,errorMessage:"Can't be blank." },
-      address: { value: "", valid: true,errorMessage:"Can't be blank." },
-      city: { value: "", valid: true,errorMessage:"Can't be blank." },
-      postCode: { value: "", valid: true,errorMessage:"Can't be blank." },
-      country: { value: "", valid: true,errorMessage:"Can't be blank." },
-      phone: { value: "", valid: true,errorMessage:"Can't be blank." },
-      avatar: { value: "", valid: true },
+      name: { value: "", valid: true, errorMessage: "" },
+      email: { value: "", valid: true, errorMessage: "" },
+      address: { value: "", valid: true, errorMessage: "" },
+      city: { value: "", valid: true, errorMessage: "" },
+      postCode: { value: "", valid: true, errorMessage: "" },
+      country: { value: "", valid: true, errorMessage: "" },
+      phone: { value: "", valid: true, errorMessage: "" },
+      avatar: { value: "", valid: true, errorMessage: "" },
     },
     project: {
       invoiceDate: dayjs().format("YYYY-MM-DD"),
       paymentTerms: "Net 1 Day",
-      description: {value: "", valid: true,errorMessage:"Can't be blank."},
+      description: {
+        value: "",
+        valid: true,
+        errorMessage: "Invalid Description",
+      },
       status: "pending",
-      
       statusDropdown: false,
       paymentTermsDropdown: false,
     },
@@ -256,9 +327,9 @@ function App() {
   const savedData = JSON.parse(localStorage.getItem("invoiceData"));
   const initialInvoiceData = {
     invoiceData: savedData || data,
+    clientEmails:savedData?.map((item)=>item?.clientEmail) || [],
     status: ["draft", "pending", "paid"],
     showStatus: false,
-    clients: [],
   };
   const [invoice, dispatchInvoice] = useReducer(
     invoiceReducer,

@@ -12,7 +12,7 @@ function InputField({ field, section, id }) {
     section === "items"
       ? dispatchForm({
           type: "UPDATE_ITEMS",
-          payload: { rowId: id, itemKey: name.split('-')[0], itemValue:value },
+          payload: { rowId: id, itemKey: name.split("-")[0], itemValue: value },
         })
       : dispatchForm({
           type: "UPDATE_PROFILE_FORM",
@@ -20,6 +20,9 @@ function InputField({ field, section, id }) {
         });
   };
   const isValid = form[section][field?.id]?.valid;
+  const currentObj = form.items.find((item) => item.id === id);
+  const itemKey = section === "items" ? field.id.split("-")[0] : undefined;
+  const isItemsValid = currentObj?.[itemKey]?.valid;
   return (
     <label className={`form-label ${field.id}`} htmlFor={field.uniqueId}>
       {field?.label}
@@ -35,21 +38,21 @@ function InputField({ field, section, id }) {
           />
           <span
             className={`custom-file-label ${
-              form?.[section]?.[field?.id]?.name && "uploaded"
+              form?.[section]?.[field?.id]?.value && "uploaded"
             }`}
           >
-            {form?.[section]?.[field?.id]?.name
+            {form?.[section]?.[field?.id]?.value
               ? "Photo Uploaded"
               : "Upload Photo"}
-            {form?.[section]?.[field?.id]?.name && (
+            {form?.[section]?.[field?.id]?.value && (
               <span className="check-wrapper">
                 <Check className="success-icon" />
               </span>
             )}
           </span>
           <span className="custom-file-text">
-            {form?.[section]?.[field?.id]?.name
-              ? `${form?.[section]?.[field?.id]?.name}`
+            {form?.[section]?.[field?.id]?.value
+              ? `${form?.[section]?.[field?.id]?.value?.name}`
               : `Recommended size is 150px by 150px (optional). PNG, JPEG, JPG`}
           </span>
         </div>
@@ -61,10 +64,16 @@ function InputField({ field, section, id }) {
           id={field.uniqueId}
           placeholder={field.placeholder}
           onChange={handleChange}
-          className={`input-field ${!isValid && "error-border"} ${field.id} `}
+          className={`input-field ${field.id} ${!isValid && "error-border"}  ${
+            section === "items" && "items"
+          } `}
         />
       )}
-      {!isValid && <span className="error-message">{form?.[section]?.[field?.id]?.errorMessage}</span>}
+      {!isValid && (
+        <span className="error-message">
+          {form?.[section]?.[field?.id]?.errorMessage}
+        </span>
+      )}
     </label>
   );
 }

@@ -16,9 +16,10 @@
   width: 100%;
   background-color: var(--dark-card-bg);
   padding: 3.6875rem 3.5rem 2rem 10rem;
-  height: 100vh;
-  overflow-y: auto;
+  min-height: 100vh;
+  overflow: none;
   border-radius: 0 1.25rem 1.25rem 0;
+  
 }
 .form-header,
 .company-wrapper,
@@ -36,11 +37,10 @@
 }
 .form-content {
   width: 100%;
-  margin-top: 2.8125rem;
-  height: 600px;
+  /* margin-top: 2.8125rem; */
+  height: 650px;
   overflow-y: auto;
-  padding: 2rem 0;
-  padding-bottom: 2rem;
+  padding-top: 2rem ;
 
 }
 .form-content::-webkit-scrollbar {
@@ -170,7 +170,9 @@ input[type="file"]::-webkit-file-upload-button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 2.875rem;
+  margin-top: 3.875rem;
+  
+  
 }
 .draft-send-wrapper{
   display: flex;
@@ -178,9 +180,9 @@ input[type="file"]::-webkit-file-upload-button {
   gap: .5rem;
 }
 /* ERROR STATES */
-.input-field.error-border {
+.input-field.error-border:not(.items) {
   border:1px solid var(--error-red) !important;
-  background-color: red!important;
+  background-color: rgba(241, 76, 76, 0.211)!important;
 }
 .error-message{
   font-size: 0.8125rem;

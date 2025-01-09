@@ -5,32 +5,31 @@ import Project from "./Project";
 import Items from "./Items";
 import FormButton from "./FormComponents/FormButton";
 import { DataContext } from "../../App";
+import { p } from "framer-motion/client";
 
 function Form() {
-  const { form, dispatchForm } = useContext(DataContext);
-  const { name, address, city, postCode, country, email, phone, logo } =
-    form.company;
-  const {
-    name: clientName,
-    address: clientAddress,
-    city: clientCity,
-    postCode: clientPostCode,
-    country: clientCountry,
-    email: clientEmail,
-    phone: clientPhone,
-    avatar,
-  } = form.client;
-
-
+  const { form, dispatchForm,dispatchInvoice } = useContext(DataContext);
+  // const { name, address, city, postCode, country, email, phone, logo } =
+  //   form.company;
+  // const {
+  //   name: clientName,
+  //   address: clientAddress,
+  //   city: clientCity,
+  //   postCode: clientPostCode,
+  //   country: clientCountry,
+  //   email: clientEmail,
+  //   phone: clientPhone,
+  //   avatar,
+  // } = form.client;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     validateForm();
-    if(form.valid){
-      alert("Form is valid");
-    }
-    else{
-      alert("Form is invalid");
+    if (form.formValid) {
+      console.log("Form is valid");
+      dispatchInvoice({ type: "CREATE_INVOICE",payload: { formData:form } });
+    } else {
+      console.log("Form is invalid");
       return;
     }
   };
@@ -39,11 +38,11 @@ function Form() {
     const validationRules = {
       email: {
         regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-        errorMessage: "Invalid email",
+        errorMessage: "Invalid email format",
       },
       phone: {
         regex: /^[+]?[0-9]{1,4}?[-.\s]?[0-9]{1,15}$/,
-        errorMessage: "Invalid phone number",
+        errorMessage: "Invalid phone number format",
       },
     };
   
@@ -55,10 +54,44 @@ function Form() {
       type: "VALIDATE_FORM",
       payload: { sectionToValidate: "client", validationRules },
     });
-    // dispatchForm({
-    //   type: "VALIDATE_FORM",
-    //   payload: { sectionToValidate: "project", validationRules },
-    // });
+    dispatchForm({
+      type: "VALIDATE_FORM",
+      payload: { sectionToValidate: "project", validationRules: { description: { regex: /.+/, errorMessage: "Description is required" } } },
+    });
+  
+    validateItems();
+  };
+  
+  const validateItems = () => {
+    const updatedItems = form.items.map((item) => {
+      let isValid = true;
+      const updatedItem = { ...item };
+  
+      if (item.productName.value.trim() === "") {
+        updatedItem.productName.valid = false;
+        updatedItem.productName.errorMessage = "Item name is required";
+        isValid = false;
+      }
+  
+      if (isNaN(item.quantity.value) || item.quantity.value.trim() === "") {
+        updatedItem.quantity.valid = false;
+        updatedItem.quantity.errorMessage = "";
+        isValid = false;
+      }
+  
+      if (isNaN(item.price.value) || item.price.value.trim() === "") {
+        updatedItem.price.valid = false;
+        updatedItem.price.errorMessage = "";
+        isValid = false;
+      }
+  
+      return { ...updatedItem, valid: isValid };
+    });
+  
+    dispatchForm({
+      type: "VALIDATE_ITEMS",
+      payload: { items: updatedItems },
+    });
   };
   const data = {
     discard: {
