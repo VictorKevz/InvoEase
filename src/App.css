@@ -15,6 +15,7 @@
   padding: 0 1.5rem!important;
   min-height: 100vh!important;
 }
+
 .btn{
   width: fit-content!important;
   height: 48px!important;
@@ -23,21 +24,22 @@
   color: var(--white)!important;
   font-size: .9375rem;
   font-weight: bold;
+  background: var(--neutral-light);
 }
 .btn.edit{
-  background-color: var(--dark-alt)!important;
+  background: var(--dark-alt)!important;
   color: var(--neutral-light)!important;
 }
 .btn.delete{
-  background-color: var(--error-red)!important;
+  background: var(--error-red)!important;
 }
 .btn.markPaid,.btn.send{
-  background-color: var(--primary-color)!important;
+  background: var(--primary-color)!important;
 }
 .btn.draft{
-  background-color: #373B53!important;
+  background: #373B53!important;
 }
 .btn.discard{
-  background-color: #F9FAFE!important;
+  background: #F9FAFE!important;
   color: var(--accent-purple)!important;
 }

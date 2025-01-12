@@ -56,7 +56,7 @@ fieldset,
 input {
   border: none;
   outline-color: var(--accent-purple);
-  background-color: inherit;
+  background: none;
   cursor: pointer;
 }
 button,

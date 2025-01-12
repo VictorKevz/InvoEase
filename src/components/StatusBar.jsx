@@ -1,7 +1,7 @@
 import React from "react";
 function StatusBar({ obj }) {
   const formatStatus = (status) => {
-    return status.charAt(0).toUpperCase() + status.slice(1);
+    return status?.charAt(0)?.toUpperCase() + status?.slice(1);
   };
   return (
     <span className={`status ${obj?.status}`}>

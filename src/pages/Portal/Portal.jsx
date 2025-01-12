@@ -53,7 +53,7 @@ function Portal() {
         </div>
       </header>
       <InvoiceCard />
-      {form?.showForm && <Form />}
+      
     </section>
   );
 }

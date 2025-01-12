@@ -46,7 +46,7 @@ function InvoiceCard() {
                   <p className="due-date">
                     Due {getFormattedDate(obj?.paymentDue)}
                   </p>
-                  <p className="client-name">{obj?.clientName}</p>
+                  <p className="client-name">{obj?.client?.name}</p>
                   <div className="total-status-wrapper">
                     <p className="total">
                       {getCurrencySymbol(settings.currency)} {obj?.total}

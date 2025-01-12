@@ -40,6 +40,7 @@ function DropDown({ data, isOpen, toggleStateKey, name, selected, caption }) {
                         payload: {
                           key: name,
                           option: item.value,
+                          dropDownKey: toggleStateKey,
                         },
                       })
                     }

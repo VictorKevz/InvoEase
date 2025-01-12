@@ -5,29 +5,40 @@ import { KeyboardArrowLeft } from "@mui/icons-material";
 import StatusBar from "../../components/StatusBar";
 import "./detailsPage.css";
 import InvoiceButton from "../../components/InvoiceButton";
+import { title } from "framer-motion/client";
+import Modal from "../../components/Modal/Modal";
 function DetailsInvoicePage() {
-  const { invoice, settings, filteredData } = useContext(DataContext);
+  const { invoice, settings, filteredData, dispatchForm } =
+    useContext(DataContext);
   const { id } = useParams();
   const currentObj = invoice?.invoiceData?.find((obj) => obj?.id === id);
 
   const deleteData = {
     text: "Delete",
-    id: "delete",
-    actionType: "",
+    color: "delete",
+    actionType: "SHOW_WARNING_MODAL",
+    id: currentObj?.id,
+    title: "Confirm Deletion",
+    message: `Are you sure you want to delete invoice #${currentObj?.id}? This action cannot be undone.`,
   };
   const editData = {
     text: "Edit",
-    id: "edit",
+    color: "edit",
     actionType: "",
+    id: currentObj?.id,
+    obj: currentObj,
   };
   const paidData = {
     text: "Mark as Paid",
-    id: "markPaid",
-    actionType: "",
+    color: "markPaid",
+    actionType: "SHOW_WARNING_MODAL",
+    id: currentObj?.id,
+    title: "Confirm Status Change",
+    message: `Are you sure you want to mark invoice #${currentObj?.id} as paid? This action cannot be undone.`,
   };
-  const isPaid = currentObj.status === "paid"
-  const isPending = currentObj.status === "pending"
-  const isDraft = currentObj.status === "draft"
+  const isPaid = currentObj?.status === "paid";
+  const isPending = currentObj?.status === "pending";
+  const isDraft = currentObj?.status === "draft";
   return (
     <section className="wrapper detailsPage">
       <header className="detailsPage-header">
@@ -42,12 +53,13 @@ function DetailsInvoicePage() {
           </p>
           <div className="edit-delete-paid-wrapper">
             {!isPaid && <InvoiceButton data={editData} />}
-             <InvoiceButton data={deleteData} />
+            <InvoiceButton data={deleteData} />
             {isPending && <InvoiceButton data={paidData} />}
           </div>
         </div>
         <div className="details-content-card"></div>
       </div>
+      {invoice.warningModal.show && <Modal />}
     </section>
   );
 }

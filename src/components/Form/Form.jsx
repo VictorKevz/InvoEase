@@ -5,35 +5,45 @@ import Project from "./Project";
 import Items from "./Items";
 import FormButton from "./FormComponents/FormButton";
 import { DataContext } from "../../App";
-import { p } from "framer-motion/client";
 
 function Form() {
-  const { form, dispatchForm,dispatchInvoice } = useContext(DataContext);
-  // const { name, address, city, postCode, country, email, phone, logo } =
-  //   form.company;
-  // const {
-  //   name: clientName,
-  //   address: clientAddress,
-  //   city: clientCity,
-  //   postCode: clientPostCode,
-  //   country: clientCountry,
-  //   email: clientEmail,
-  //   phone: clientPhone,
-  //   avatar,
-  // } = form.client;
+  const { form, dispatchForm, dispatchInvoice, invoice } =
+    useContext(DataContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    // Check the status first to determine if the form should be saved as a draft
+    if (form.project.status === "draft") {
+      dispatchInvoice({
+        type: "CREATE_INVOICE",
+        payload: {
+          formData: form,
+          editingID: form.editingObj?.id,
+        },
+      });
+      console.log("Saving as draft, skipping validation.");
+      // Reset form after successful invoice creation saved as draft
+      dispatchForm({ type: "RESET_FORM" });
+      return; // Exit the function quickly
+    }
+
+    // Validate the form before creating the invoice
     validateForm();
+
     if (form.formValid) {
-      console.log("Form is valid");
-      dispatchInvoice({ type: "CREATE_INVOICE",payload: { formData:form } });
+      console.log("Form is valid, creating invoice.");
+      dispatchInvoice({
+        type: "CREATE_INVOICE",
+        payload: { formData: form, editingID: form.editingObj?.id },
+      });
+
+      // Reset form after successful invoice creation
+      dispatchForm({ type: "RESET_FORM" });
     } else {
-      console.log("Form is invalid");
+      console.log("Form is invalid.");
       return;
     }
   };
-  
+
   const validateForm = () => {
     const validationRules = {
       email: {
@@ -41,11 +51,11 @@ function Form() {
         errorMessage: "Invalid email format",
       },
       phone: {
-        regex: /^[+]?[0-9]{1,4}?[-.\s]?[0-9]{1,15}$/,
+        regex: /^[+]?[0-9]{1,4}([\s.-]?[0-9]{1,15})+$/,
         errorMessage: "Invalid phone number format",
       },
     };
-  
+
     dispatchForm({
       type: "VALIDATE_FORM",
       payload: { sectionToValidate: "company", validationRules },
@@ -56,38 +66,43 @@ function Form() {
     });
     dispatchForm({
       type: "VALIDATE_FORM",
-      payload: { sectionToValidate: "project", validationRules: { description: { regex: /.+/, errorMessage: "Description is required" } } },
+      payload: {
+        sectionToValidate: "project",
+        validationRules: {
+          description: { regex: /.+/, errorMessage: "Description is required" },
+        },
+      },
     });
-  
+
     validateItems();
   };
-  
+
   const validateItems = () => {
     const updatedItems = form.items.map((item) => {
       let isValid = true;
       const updatedItem = { ...item };
-  
-      if (item.productName.value.trim() === "") {
+
+      if (item.productName?.value?.trim() === "") {
         updatedItem.productName.valid = false;
         updatedItem.productName.errorMessage = "Item name is required";
         isValid = false;
       }
-  
-      if (isNaN(item.quantity.value) || item.quantity.value.trim() === "") {
+
+      if (isNaN(item.quantity.value)) {
         updatedItem.quantity.valid = false;
         updatedItem.quantity.errorMessage = "";
         isValid = false;
       }
-  
-      if (isNaN(item.price.value) || item.price.value.trim() === "") {
+
+      if (isNaN(item.price.value)) {
         updatedItem.price.valid = false;
         updatedItem.price.errorMessage = "";
         isValid = false;
       }
-  
+
       return { ...updatedItem, valid: isValid };
     });
-  
+
     dispatchForm({
       type: "VALIDATE_ITEMS",
       payload: { items: updatedItems },
@@ -100,22 +115,17 @@ function Form() {
       actionType: "DISCARD_INVOICE",
       type: "button",
     },
-    draft: {
-      text: "Save as Draft",
-      id: "draft",
-      actionType: "SAVE_DRAFT",
-      type: "button",
-    },
+
     send: {
-      text: "Save & Send",
-      id: "send",
+      text: form.project.status === "draft" ? "Save as Draft" : "Save & Send",
+      id: form.project.status === "draft" ? "draft" : "send",
       actionType: "SAVE_INVOICE",
-      type: "submit",
+      type: "button",
     },
   };
   return (
     <article className="form-wrapper">
-      <form className="form-container" onSubmit={handleSubmit}>
+      <form className="form-container">
         <header className="form-header">
           <h2 className="form-main-title">New Invoice</h2>
           <p className="form-parag">Fill out the form to create an invoice</p>
@@ -126,10 +136,10 @@ function Form() {
           <Items />
         </div>
         <div className="form-action-btn-wrapper">
-          <FormButton data={data.discard} />
+          <FormButton data={data.discard} onSubmit={handleSubmit} />
           <div className="draft-send-wrapper">
-            <FormButton data={data.draft} />
-            <FormButton data={data.send} />
+            {/* <FormButton data={data.draft} /> */}
+            <FormButton data={data.send} onSubmit={handleSubmit} />
           </div>
         </div>
       </form>
