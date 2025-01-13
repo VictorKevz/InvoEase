@@ -48,7 +48,7 @@ function Project() {
           isOpen={paymentTermsDropdown}
           toggleStateKey="paymentTermsDropdown"
           name="paymentTerms"
-          selected={paymentTerms}
+          selected={paymentTerms.value}
           caption="Payment Terms"
         />
         <DropDown
@@ -56,7 +56,7 @@ function Project() {
           isOpen={statusDropdown}
           toggleStateKey="statusDropdown"
           name="status"
-          selected={status}
+          selected={status.value}
           caption="Status"
         />
         <DatePickerMUI />

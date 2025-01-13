@@ -10,8 +10,7 @@ function FormButton({ data, onSubmit }) {
       onClick={() => {
         data.id === "discard"
           ? dispatchForm({
-              type: "SHOW_FORM_ITEMS",
-              payload: { formKey: "showForm" },
+              type: data.actionType,
             })
           : onSubmit();
       }}

@@ -38,7 +38,7 @@ function DetailsInvoicePage() {
   };
   const isPaid = currentObj?.status === "paid";
   const isPending = currentObj?.status === "pending";
-  const isDraft = currentObj?.status === "draft";
+  // const isDraft = currentObj?.status?.value === "draft";
   return (
     <section className="wrapper detailsPage">
       <header className="detailsPage-header">

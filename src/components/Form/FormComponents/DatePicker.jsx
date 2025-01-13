@@ -15,11 +15,11 @@ function DatePickerMUI() {
         id="invoiceDate"
         type="date"
         
-        value={dayjs(invoiceDate).format("YYYY-MM-DD")}
+        value={dayjs(invoiceDate.value).format("YYYY-MM-DD")}
         onChange={(e) =>
           dispatchForm({
-            type: "UPDATE_PROJECT_FORM",
-            payload: { name: "invoiceDate", value: e.target.value },
+            type: "UPDATE_PROFILE_FORM",
+            payload: { name: "invoiceDate", value: e.target.value, section: "project" },
           })
         }
         className="input-field invoiceDate"

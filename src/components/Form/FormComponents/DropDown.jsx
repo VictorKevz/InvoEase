@@ -17,7 +17,7 @@ function DropDown({ data, isOpen, toggleStateKey, name, selected, caption }) {
           })
         }
       >
-        {selected.charAt(0).toUpperCase() + selected.slice(1)}
+        {selected?.charAt(0).toUpperCase() + selected.slice(1)}
         {isOpen ? (
           <KeyboardArrowUp className="arrow-icon" />
         ) : (

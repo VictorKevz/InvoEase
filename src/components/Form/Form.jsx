@@ -12,7 +12,7 @@ function Form() {
 
   const handleSubmit = () => {
     // Check the status first to determine if the form should be saved as a draft
-    if (form.project.status === "draft") {
+    if (form.project.status.value === "draft") {
       dispatchInvoice({
         type: "CREATE_INVOICE",
         payload: {
@@ -27,15 +27,13 @@ function Form() {
     }
 
     // Validate the form before creating the invoice
-    validateForm();
-
-    if (form.formValid) {
-      console.log("Form is valid, creating invoice.");
+    const isFormValid = validateForm();
+    if (isFormValid) {
       dispatchInvoice({
         type: "CREATE_INVOICE",
         payload: { formData: form, editingID: form.editingObj?.id },
       });
-
+      console.log("Form is valid, creating invoice.");
       // Reset form after successful invoice creation
       dispatchForm({ type: "RESET_FORM" });
     } else {
@@ -45,6 +43,8 @@ function Form() {
   };
 
   const validateForm = () => {
+    let overallValid = true;
+    // The validationRules object contains the regex patterns and error messages for each field
     const validationRules = {
       email: {
         regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -52,39 +52,65 @@ function Form() {
       },
       phone: {
         regex: /^[+]?[0-9]{1,4}([\s.-]?[0-9]{1,15})+$/,
-        errorMessage: "Invalid phone number format",
+        errorMessage: "",
       },
+      description: { regex: /.+/, errorMessage: "Invalid description" },
+      invoiceDate: { regex: /.+/, errorMessage: "Invalid date" },
+      paymentTerms: { regex: /.+/, errorMessage: "Invalid payment terms" },
+      status: { regex: /.+/, errorMessage: "Invalid status" },
     };
 
-    dispatchForm({
-      type: "VALIDATE_FORM",
-      payload: { sectionToValidate: "company", validationRules },
-    });
-    dispatchForm({
-      type: "VALIDATE_FORM",
-      payload: { sectionToValidate: "client", validationRules },
-    });
-    dispatchForm({
-      type: "VALIDATE_FORM",
-      payload: {
-        sectionToValidate: "project",
-        validationRules: {
-          description: { regex: /.+/, errorMessage: "Description is required" },
-        },
-      },
+    ["company", "client", "project"].forEach((section) => {
+      let sectionValid = true;
+
+      const updatedSection = { ...form[section] };
+      Object.keys(updatedSection).forEach((key) => {
+        const field = updatedSection[key];
+
+        // Skip validation for logo and avatar
+        if (key === "logo" || key === "avatar" || typeof field === "boolean") {
+          return;
+        }
+        if (validationRules[key]) {
+          const { regex, errorMessage } = validationRules[key];
+          if (!regex.test(field.value)) {
+            field.valid = false;
+            field.errorMessage = errorMessage;
+          }
+        } else if (field?.value?.trim() === "") {
+          field.valid = false;
+          field.errorMessage = `Invalid ${key}`;
+        } else {
+          field.valid = true;
+          field.errorMessage = "";
+        }
+      });
+
+      if (!sectionValid) overallValid = false;
+
+      dispatchForm({
+        type: "VALIDATE_FORM",
+        payload: { sectionToValidate: section, updatedSection },
+      });
     });
 
-    validateItems();
+    // Validate items and combine validity
+    const itemsValid = validateItems();
+
+    // Combine field validation and items validation
+    overallValid = overallValid && itemsValid;
+
+    return overallValid;
   };
 
   const validateItems = () => {
+    let isValid = true;
     const updatedItems = form.items.map((item) => {
-      let isValid = true;
       const updatedItem = { ...item };
 
       if (item.productName?.value?.trim() === "") {
         updatedItem.productName.valid = false;
-        updatedItem.productName.errorMessage = "Item name is required";
+        updatedItem.productName.errorMessage = "Required";
         isValid = false;
       }
 
@@ -107,18 +133,21 @@ function Form() {
       type: "VALIDATE_ITEMS",
       payload: { items: updatedItems },
     });
+
+    return isValid;
   };
   const data = {
     discard: {
       text: "Discard",
       id: "discard",
-      actionType: "DISCARD_INVOICE",
+      actionType: "RESET_FORM",
       type: "button",
     },
 
     send: {
-      text: form.project.status === "draft" ? "Save as Draft" : "Save & Send",
-      id: form.project.status === "draft" ? "draft" : "send",
+      text:
+        form.project.status.value === "draft" ? "Save as Draft" : "Save & Send",
+      id: form.project.status.value === "draft" ? "draft" : "send",
       actionType: "SAVE_INVOICE",
       type: "button",
     },
@@ -136,7 +165,7 @@ function Form() {
           <Items />
         </div>
         <div className="form-action-btn-wrapper">
-          <FormButton data={data.discard} onSubmit={handleSubmit} />
+          <FormButton data={data.discard} />
           <div className="draft-send-wrapper">
             {/* <FormButton data={data.draft} /> */}
             <FormButton data={data.send} onSubmit={handleSubmit} />
