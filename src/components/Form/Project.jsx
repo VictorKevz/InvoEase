@@ -8,13 +8,7 @@ import DatePickerMUI from "./FormComponents/DatePicker";
 
 function Project() {
   const { form } = useContext(DataContext);
-  const {
-    paymentTerms,
-    status,
-    description,
-    statusDropdown,
-    paymentTermsDropdown,
-  } = form.project;
+  const { paymentTerms, status, description } = form.project;
 
   const data = {
     paymentTerms: [
@@ -28,16 +22,15 @@ function Project() {
       { value: "paid", label: "Paid" },
       { value: "draft", label: "Draft" },
     ],
-    
-    description:{
-      value:description.value,
-      label:"Project Description",
-      type:"text",
-      placeholder:"Graphic Design",
-      id:"description",
-      uniqueId:"project-description"
-    }
 
+    description: {
+      value: description.value,
+      label: "Project Description",
+      type: "text",
+      placeholder: "Graphic Design",
+      id: "description",
+      uniqueId: "project-description",
+    },
   };
 
   return (
@@ -45,7 +38,7 @@ function Project() {
       <fieldset className="dropdown-field-wrapper">
         <DropDown
           data={data.paymentTerms}
-          isOpen={paymentTermsDropdown}
+          isOpen={form.paymentTermsDropdown}
           toggleStateKey="paymentTermsDropdown"
           name="paymentTerms"
           selected={paymentTerms.value}
@@ -53,7 +46,7 @@ function Project() {
         />
         <DropDown
           data={data.status}
-          isOpen={statusDropdown}
+          isOpen={form.statusDropdown}
           toggleStateKey="statusDropdown"
           name="status"
           selected={status.value}
@@ -61,7 +54,7 @@ function Project() {
         />
         <DatePickerMUI />
         <InputField field={data.description} section="project" />
-        </fieldset>
+      </fieldset>
     </div>
   );
 }
