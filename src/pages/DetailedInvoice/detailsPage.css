@@ -1,110 +1,272 @@
-.wrapper.detailsPage{
-justify-content: flex-start!important;
-margin-top: 4.8125rem;
-min-height: 0!important;
-
+.wrapper.detailsPage {
+  justify-content: flex-end !important;
+  margin-top: 2.8125rem;
+  min-height: 0 !important;
+  padding: 0 1.5rem;
 }
-.detailsPage-header{
-    max-width: 1000px;
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
+.detailsPage-header {
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
 }
-.go-back-link{
-    font-size: .93125rem;
-    font-weight: bold;
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    gap: 1.55rem;
-    line-height: .93125rem;
+.go-back-link {
+  font-size: 0.93125rem;
+  font-weight: bold;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 1.55rem;
+  line-height: 0.93125rem;
 }
-.detailsPage-content-wrapper{
-    max-width: 1000px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.detailsPage-content-wrapper {
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
-.details-actions-card{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 1.9375rem;
-    min-height: 88px;
-    background-color: var(--dark-bg);
-    padding: 0 2rem;
-    border-radius: .5rem;
+.details-actions-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.9375rem;
+  min-height: 88px;
+  background-color: var(--dark-bg);
+  padding: 0 2rem;
+  border-radius: 0.5rem;
 }
-.details-status{
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
+.details-status {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
 }
-.edit-delete-paid-wrapper{
-    display: flex;
-    align-items: center;
-    gap: .5rem;
+.edit-delete-paid-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* DETAILS PAGE CONTENT CARD STYLES................................ */
-.details-content-card{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--dark-bg);
-    padding: 2rem;
-    border-radius: .5rem;
+.details-content-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark-bg);
+  padding: 2rem;
+  border-radius: 0.5rem;
 }
-.detailsPage-invoice-address{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.detailsPage-invoice-address {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
-.company-avatar{
-    width: 4rem;
-    height: 4rem;
-    padding: 1rem;
-    border-radius: 50%;
-    background-color: var(--orange);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
+.company-client-address-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.company-avatar-print {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+.company-avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--white);
+  font-weight: bold;
+}
+.print-btn {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  color: var(--white);
+  position: relative;
+}
+.print-btn::before {
+    content: "(1) Please select `more settings` (2) Select `Background Graphics` (3) Set layout to `Portrait`";
+    width: fit-content; 
+    min-width: 260px;
+    text-align: left;
+    font-size: 1rem;
+    text-wrap: wrap;
+    background-color: var(--dark-alt);
     color: var(--white);
-    font-weight: bold;
+    font-weight: 500;
+    padding: .65rem;
+    border-radius: .4rem;
+    position: absolute;
+    right: 100%;
+    margin-right: .35rem;
+    opacity: 0;
+    transition: .3s ease-in-out;
+    transform: translateY(4px);
+    box-shadow: 0 0 1rem rgba(38, 4, 52, 0.296);
+    line-height: 1.5;
+
+  }
+  .print-btn:hover::before{
+    opacity: 1;
+    transition: .3s ease-in-out;
+    transform: translateY(-2px);
+  }
+.address-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--dark-alt);
 }
-.company-client-address-wrapper{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 1.5rem;
-    align-items: flex-start;
-    margin-top: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--dark-alt);
+.address {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-style: normal;
+  color: var(--white);
 }
-.address{
-    display: flex;
-    flex-direction: column;
-    gap: .35rem;
-    font-style: normal;
-    
+.client-address {
+  text-align: right;
 }
-.company-name{
-    font-size: 1.125rem;
-    font-weight: bold;
-    color: var(--white);
-    text-transform: uppercase;
+.company-label,
+.client-label {
+  font-size: 0.93125rem;
+  font-weight: normal;
+  color: var(--neutral-light);
 }
-.description-date-due-wrapper{
-    display: flex;
-    justify-content: space-between;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+.company-name {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: var(--white);
+  text-transform: uppercase;
 }
-.details-label{
-    font-size: 1.2rem;
-    font-weight: bold;
+.description-date-due-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.details-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--neutral-light);
+}
+.details-value {
+  font-size: 0.95rem;
+  font-weight: normal;
+  color: var(--white);
+}
+.details-invoice-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  width: 100%;
+  background-color: var(--dark-alt);
+  border-radius: 0.5rem;
+}
+.invoice-id {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--white);
+  padding: 2rem 1.5rem;
+}
+.items-header,
+.item {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+}
+.items-header,
+.items-list {
+  padding: 1rem 1.5rem;
+}
+.item-header {
+  font-size: 0.93125rem;
+  font-weight: bold;
+  color: var(--neutral-light);
+  text-transform: uppercase;
+  letter-spacing: 0.04rem;
+}
+.items-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.item-value {
+  text-align: left;
+  color: var(--white);
+}
+.details-total-wrapper {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 2rem 1.5rem;
+  background-color: var(--accent-black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+.total-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--neutral-light);
+}
+.details-total-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--white);
+}
+@media print {
+  body,
+  html {
+    color: inherit !important;
+    background-color: var(--dark-bg) !important;
+
+    page-break-inside: avoid !important;
+  }
+
+  .print-btn,
+  .navbar-wrapper,
+  .detailsPage-header,
+  .details-actions-card {
+    display: none;
+  }
+  .details-content-card {
+    overflow: visible;
+    page-break-inside: avoid !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+    background-color: inherit !important;
+    color: inherit !important;
+    font-family: "Montserrat", sans-serif !important;
+  }
+  .company-label,
+  .company-label
+   {
+    color: inherit !important;
+  }
+  /* .total-label,.total-value {
+    color: inherit !important;
+  } */
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }

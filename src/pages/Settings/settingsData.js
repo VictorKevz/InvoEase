@@ -23,21 +23,24 @@ export const settingsData = [
     options: [
       {
         id: uuidv4(),
-        name: "euro",
+        name: "EUR",
+        locale:"fi-FI",
         text: "Euro",
         parag: "Use euros",
         icon: Euro,
       },
       {
         id: uuidv4(),
-        name: "usd",
+        name: "USD",
+        locale:"en-US",
         text: "United States Dollar",
         parag: "Use USD",
         icon: AttachMoney,
       },
       {
         id: uuidv4(),
-        name: "pound",
+        name: "GBP",
+        locale:"en-GB",
         text: "British Pound",
         parag: "Use pounds",
         icon: CurrencyPound,

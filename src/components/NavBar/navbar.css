@@ -1,12 +1,17 @@
 .navbar-wrapper {
   width: 103px;
-  height: 100vh;
+  min-height: 100dvh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--dark-bg);
   border-radius: 0 1.25rem 1.25rem 0;
   z-index: 100;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 0;
 }
 .logo-item {
   display: flex;

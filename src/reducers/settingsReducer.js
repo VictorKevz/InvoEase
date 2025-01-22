@@ -3,7 +3,9 @@ export const settingsReducer = (state, action) => {
     case "UPDATE_TAB":
       const { key, tab } = action.payload;
       return { ...state, [key]: tab };
-
+      // case "UPDATE_LOCALE":
+      //   const { value } = action.payload;
+      //   return { ...state, locale: value };  
     default:
       state;
   }

@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { DataContext } from "../../App";
-import { KeyboardArrowLeft } from "@mui/icons-material";
+import { KeyboardArrowLeft, Print } from "@mui/icons-material";
 import StatusBar from "../../components/StatusBar";
 import "./detailsPage.css";
 import InvoiceButton from "../../components/InvoiceButton";
-import { title } from "framer-motion/client";
 import Modal from "../../components/Modal/Modal";
+import { useReactToPrint } from "react-to-print";
 function DetailsInvoicePage() {
-  const { invoice, settings, filteredData, dispatchForm } =
+  const { invoice, settings, filteredData, dispatchForm, formatCurrency } =
     useContext(DataContext);
+
   const { id } = useParams();
   const currentObj = invoice?.invoiceData?.find((obj) => obj?.id === id);
 
@@ -38,9 +39,12 @@ function DetailsInvoicePage() {
   };
   const isPaid = currentObj?.status === "paid";
   const isPending = currentObj?.status === "pending";
-  // const isDraft = currentObj?.status?.value === "draft";
 
   const companyLogo = currentObj?.company?.name.slice(0, 1).toUpperCase();
+  const items = ["Item Name", "QTY", "Price", "Total"];
+  const contentRef = useRef(null);
+
+  const reactToPrintFn = useReactToPrint({ contentRef });
   return (
     <div className="wrapper detailsPage">
       <header className="detailsPage-header">
@@ -59,42 +63,83 @@ function DetailsInvoicePage() {
             {isPending && <InvoiceButton data={paidData} />}
           </div>
         </div>
-        <section className="details-content-card">
+        <section className="details-content-card" ref={contentRef} style={{fontFamily: settings.fontTheme}}>
           <header className="detailsPage-invoice-address">
-            <span className="company-avatar">{companyLogo}</span>
             <div className="company-client-address-wrapper">
-              <address className="address company-address">
-                {Object.keys(currentObj?.company).map((key) => (
-                  <p className={`company-${key}`} key={key}>
-                    {currentObj?.company?.[key]}
-                  </p>
-                ))}
-              </address>
-              <address className="address client-address">
-                <h1 className="detailsPage-title">Bill to</h1>
-                {Object.keys(currentObj?.client).map((key) => (
-                  <p className={`client-${key}`} key={key}>
-                    {currentObj?.client?.[key]}
-                  </p>
-                ))}
-              </address>
+              <div className="company-avatar-print">
+                <h1 className="company-avatar">{companyLogo}</h1>
+                <button
+                  type="button"
+                  className="print-btn"
+                  onClick={() => reactToPrintFn()}
+                >
+                  <Print />
+                </button>
+              </div>
+
+              <div className="address-wrapper">
+                <address className="address company-address">
+                  {Object.keys(currentObj?.company).map((key) => (
+                    <p className={` company-label company-${key}`} key={key}>
+                      {currentObj?.company?.[key]}
+                    </p>
+                  ))}
+                </address>
+                <address className="address client-address">
+                  <h2 className="client-title">Bill & Ship to</h2>
+                  {Object.keys(currentObj?.client).map((key) => (
+                    <p className={`company-label client-${key}`} key={key}>
+                      {currentObj?.client?.[key]}
+                    </p>
+                  ))}
+                </address>
+              </div>
             </div>
           </header>
           <div className="description-date-due-wrapper">
             <div className="description">
               <p className="details-label">Project Description</p>
-              <p>{currentObj?.description}</p>
+              <span className="details-value">{currentObj?.description}</span>
             </div>
             <div className="date">
               <p className="details-label">Invoice Date</p>
-              <p>{currentObj?.createdAt}</p>
+              <span className="details-value">{currentObj?.createdAt}</span>
             </div>
             <div className="due">
               <p className="details-label">Due Date</p>
-              <p>{currentObj?.paymentDue}</p>
+              <span className="details-value">{currentObj?.paymentDue}</span>
             </div>
           </div>
-          
+          <div className="details-invoice-wrapper">
+            <h2 className="invoice-id">Invoice #{currentObj?.id}</h2>
+            <header className="items-header">
+              {items.map((item) => (
+                <span className="item-header" key={item}>
+                  {item}
+                </span>
+              ))}
+            </header>
+            <ul className="items-list">
+              {currentObj?.items.map((item) => (
+                <li className="item" key={item.name}>
+                  <span className="item-value">{item?.name}</span>
+                  <span className="item-value">{item?.quantity}</span>
+                  <span className="item-value">
+                    {formatCurrency(item?.price)}
+                  </span>
+                  <span className="item-value">
+                    {formatCurrency(item?.total)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <div className="details-total-wrapper">
+              <p className="total-label">Grand Total</p>
+              <span className="details-total-value">
+                {formatCurrency(currentObj?.total)}
+              </span>
+            </div>
+          </div>
         </section>
       </div>
       {invoice.warningModal.show && <Modal />}

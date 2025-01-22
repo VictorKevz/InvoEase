@@ -20,11 +20,13 @@ const Settings = () => {
 
   useEffect(() => {
     localStorage.setItem("currency", JSON.stringify(settings.currency));
+    localStorage.setItem("locale", JSON.stringify(settings.locale));
     localStorage.setItem("colorTheme", JSON.stringify(settings.colorTheme));
     localStorage.setItem("fontTheme", JSON.stringify(settings.fontTheme));
     localStorage.setItem("language", JSON.stringify(settings.language));
   }, [
     settings.currency,
+    settings.locale,
     settings.language,
     settings.colorTheme,
     settings.fontTheme,
@@ -94,10 +96,18 @@ const Settings = () => {
                       type="button"
                       className={`option-btn ${isActive && "active-option"}`}
                       onClick={() =>
+                      {
                         dispatchSettings({
                           type: "UPDATE_TAB",
                           payload: { tab: option.name, key: currentObj.id },
-                        })
+                        });
+                       {currentObj.id === "currency" && 
+                        dispatchSettings({
+                          type: "UPDATE_TAB",
+                          payload: { tab: option.locale, key: "locale" },
+                        });
+                       }
+                      }
                       }
                     >
                       <span className="theme-option-wrapper">

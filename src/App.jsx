@@ -61,7 +61,6 @@ function App() {
         valid: true,
         errorMessage: "",
       },
-      
     },
 
     items: [
@@ -149,13 +148,15 @@ function App() {
   .
   */
   // SETTINGS STATE DECLARATION...............................................
-  const savedCurrecny = JSON.parse(localStorage.getItem("currency"));
+  const savedCurrency = JSON.parse(localStorage.getItem("currency"));
+  const savedLocale = JSON.parse(localStorage.getItem("locale"));
   const savedColorTheme = JSON.parse(localStorage.getItem("colorTheme"));
   const savedFontTheme = JSON.parse(localStorage.getItem("fontTheme"));
   const savedLanguage = JSON.parse(localStorage.getItem("language"));
   const initialSettings = {
     currentTab: "currency",
-    currency: savedCurrecny || "euro",
+    currency: savedCurrency || "EUR",
+    locale: savedLocale || "fi-FI",
     language: savedLanguage || "en",
     colorTheme: savedColorTheme || "dark",
     fontTheme: savedFontTheme || '"League Spartan", sans-serif',
@@ -167,34 +168,41 @@ function App() {
   // SETTINGS STATE DECLARATION...............................................
 
   const { t } = useTranslation();
-  return (
-    <DataContext.Provider
-      value={{
-        settings,
-        dispatchSettings,
-        form,
-        dispatchForm,
-        invoice,
-        dispatchInvoice,
-        filteredData,
-        t,
-      }}
-    >
-      <main
-        className="outer-container"
-        style={{ fontFamily: `${settings.fontTheme}` }}
-      >
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/portal" element={<Portal />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/details/:id" element={<DetailsInvoicePage />} />
-        </Routes>
-        {form?.showForm && <Form />}
-      </main>
-    </DataContext.Provider>
-  );
-}
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat(settings.locale, {
+      style: "currency",
+      currency: settings.currency,
+    }).format(amount);
+  };
 
+return (
+  <DataContext.Provider
+    value={{
+      settings,
+      dispatchSettings,
+      form,
+      dispatchForm,
+      invoice,
+      dispatchInvoice,
+      filteredData,
+      t,
+      formatCurrency,
+    }}
+  >
+    <main
+      className="outer-container"
+      style={{ fontFamily: `${settings.fontTheme}` }}
+    >
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/portal" element={<Portal />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/details/:id" element={<DetailsInvoicePage />} />
+      </Routes>
+      {form?.showForm && <Form />}
+    </main>
+  </DataContext.Provider>
+);
+}
 export default App;
