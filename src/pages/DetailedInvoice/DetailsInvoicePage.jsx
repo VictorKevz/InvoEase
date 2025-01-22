@@ -39,8 +39,10 @@ function DetailsInvoicePage() {
   const isPaid = currentObj?.status === "paid";
   const isPending = currentObj?.status === "pending";
   // const isDraft = currentObj?.status?.value === "draft";
+
+  const companyLogo = currentObj?.company?.name.slice(0, 1).toUpperCase();
   return (
-    <section className="wrapper detailsPage">
+    <div className="wrapper detailsPage">
       <header className="detailsPage-header">
         <Link to="/portal" className="go-back-link">
           <KeyboardArrowLeft className="arrow-icon" /> Go Back
@@ -57,10 +59,46 @@ function DetailsInvoicePage() {
             {isPending && <InvoiceButton data={paidData} />}
           </div>
         </div>
-        <div className="details-content-card"></div>
+        <section className="details-content-card">
+          <header className="detailsPage-invoice-address">
+            <span className="company-avatar">{companyLogo}</span>
+            <div className="company-client-address-wrapper">
+              <address className="address company-address">
+                {Object.keys(currentObj?.company).map((key) => (
+                  <p className={`company-${key}`} key={key}>
+                    {currentObj?.company?.[key]}
+                  </p>
+                ))}
+              </address>
+              <address className="address client-address">
+                <h1 className="detailsPage-title">Bill to</h1>
+                {Object.keys(currentObj?.client).map((key) => (
+                  <p className={`client-${key}`} key={key}>
+                    {currentObj?.client?.[key]}
+                  </p>
+                ))}
+              </address>
+            </div>
+          </header>
+          <div className="description-date-due-wrapper">
+            <div className="description">
+              <p className="details-label">Project Description</p>
+              <p>{currentObj?.description}</p>
+            </div>
+            <div className="date">
+              <p className="details-label">Invoice Date</p>
+              <p>{currentObj?.createdAt}</p>
+            </div>
+            <div className="due">
+              <p className="details-label">Due Date</p>
+              <p>{currentObj?.paymentDue}</p>
+            </div>
+          </div>
+          
+        </section>
       </div>
       {invoice.warningModal.show && <Modal />}
-    </section>
+    </div>
   );
 }
 

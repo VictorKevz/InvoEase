@@ -5,7 +5,7 @@ min-height: 0!important;
 
 }
 .detailsPage-header{
-    max-width: 730px;
+    max-width: 1000px;
     width: 100%;
     display: flex;
     align-items: flex-start;
@@ -20,7 +20,7 @@ min-height: 0!important;
     line-height: .93125rem;
 }
 .detailsPage-content-wrapper{
-    max-width: 730px;
+    max-width: 1000px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -46,4 +46,65 @@ min-height: 0!important;
     display: flex;
     align-items: center;
     gap: .5rem;
+}
+
+/* DETAILS PAGE CONTENT CARD STYLES................................ */
+.details-content-card{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-bg);
+    padding: 2rem;
+    border-radius: .5rem;
+}
+.detailsPage-invoice-address{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.company-avatar{
+    width: 4rem;
+    height: 4rem;
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--white);
+    font-weight: bold;
+}
+.company-client-address-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--dark-alt);
+}
+.address{
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    font-style: normal;
+    
+}
+.company-name{
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: var(--white);
+    text-transform: uppercase;
+}
+.description-date-due-wrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+.details-label{
+    font-size: 1.2rem;
+    font-weight: bold;
 }
