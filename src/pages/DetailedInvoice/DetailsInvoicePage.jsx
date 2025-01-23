@@ -8,7 +8,7 @@ import InvoiceButton from "../../components/InvoiceButton";
 import Modal from "../../components/Modal/Modal";
 import { useReactToPrint } from "react-to-print";
 function DetailsInvoicePage() {
-  const { invoice, settings, filteredData, dispatchForm, formatCurrency } =
+  const { invoice, settings, filteredData, dispatchForm, formatCurrency, formatDate } =
     useContext(DataContext);
 
   const { id } = useParams();
@@ -103,11 +103,11 @@ function DetailsInvoicePage() {
             </div>
             <div className="date">
               <p className="details-label">Invoice Date</p>
-              <span className="details-value">{currentObj?.createdAt}</span>
+              <span className="details-value">{formatDate(currentObj?.createdAt)}</span>
             </div>
             <div className="due">
               <p className="details-label">Due Date</p>
-              <span className="details-value">{currentObj?.paymentDue}</span>
+              <span className="details-value">{formatDate(currentObj?.paymentDue)}</span>
             </div>
           </div>
           <div className="details-invoice-wrapper">

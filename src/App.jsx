@@ -174,35 +174,46 @@ function App() {
       currency: settings.currency,
     }).format(amount);
   };
+  const formatDate = (inputDate) => {
+    let formattedDate;
+    const date = new Date(inputDate);
+    formattedDate = new Intl.DateTimeFormat("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }).format(date);
+    return formattedDate;
+  };
 
-return (
-  <DataContext.Provider
-    value={{
-      settings,
-      dispatchSettings,
-      form,
-      dispatchForm,
-      invoice,
-      dispatchInvoice,
-      filteredData,
-      t,
-      formatCurrency,
-    }}
-  >
-    <main
-      className="outer-container"
-      style={{ fontFamily: `${settings.fontTheme}` }}
+  return (
+    <DataContext.Provider
+      value={{
+        settings,
+        dispatchSettings,
+        form,
+        dispatchForm,
+        invoice,
+        dispatchInvoice,
+        filteredData,
+        t,
+        formatCurrency,
+        formatDate,
+      }}
     >
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/portal" element={<Portal />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/details/:id" element={<DetailsInvoicePage />} />
-      </Routes>
-      {form?.showForm && <Form />}
-    </main>
-  </DataContext.Provider>
-);
+      <main
+        className="outer-container"
+        style={{ fontFamily: `${settings.fontTheme}` }}
+      >
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/portal" element={<Portal />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/details/:id" element={<DetailsInvoicePage />} />
+        </Routes>
+        {form?.showForm && <Form />}
+      </main>
+    </DataContext.Provider>
+  );
 }
 export default App;

@@ -31,6 +31,9 @@ const Settings = () => {
     settings.colorTheme,
     settings.fontTheme,
   ]);
+  useEffect(() => {
+    document.documentElement.className = settings.colorTheme;
+  }, [settings.colorTheme]);
   return (
     <motion.section 
     className="wrapper settings"

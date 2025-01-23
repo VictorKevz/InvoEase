@@ -1,5 +1,5 @@
 .wrapper.detailsPage {
-  justify-content: flex-end !important;
+  /* justify-content: flex-end !important; */
   margin-top: 2.8125rem;
   min-height: 0 !important;
   padding: 0 1.5rem;
@@ -232,7 +232,7 @@
 .details-total-value {
   font-size: 2rem;
   font-weight: bold;
-  color: var(--white);
+  color: var(--light-text);
 }
 @media print {
   body,

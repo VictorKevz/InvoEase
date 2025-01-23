@@ -79,6 +79,7 @@
   .active-tab {
     background-color: var(--primary-color);
     opacity: 1;
+    color: var(--light-text);
   }
   .slider-icon {
     font-size: 1.5rem !important;
@@ -91,7 +92,7 @@
   
   .slider-btn:not(.active-tab):hover {
     background-color: var(--primary-color);
-    color: var(--white);
+    color: var(--light-text);
     opacity: 1;
     transition: 0.3s ease-in-out;
     width: 100%;
@@ -100,6 +101,7 @@
   .slider-btn:not(.active-tab):hover .slider-icon {
     opacity: 1;
     transition: 0.3s ease-in-out;
+    color: var(--light-text);
   }
   .theme-content-wrapper{
     width: 100%;
@@ -132,7 +134,7 @@
     border-radius: 0.65rem;
     font-weight: 600;
     font-size: 0.9rem;
-    border: 1px solid var(--dark-alt);
+    border: 1px solid var(--neutral-dark);
     color: var(--white);
     position: relative;
     z-index: 5;
@@ -154,7 +156,7 @@
   .color-icon-wrapper,
   .font-text-label {
     border-radius: 0.65rem;
-    border: 1px solid var(--dark-alt);
+    border: 1px solid var(--neutral-light);
     display: flex;
     align-items: center;
     justify-content: center;
