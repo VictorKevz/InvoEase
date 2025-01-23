@@ -6,7 +6,7 @@ export const homeData = [
     id: "feature1",
     title: "Customizable",
     parag:
-      "Tailor your invoices to reflect your brand. Choose from a variety of templates and color schemes to create professional invoices that represent your business.",
+      "Tailor your invoices to reflect your brand. Create professional invoices.",
     icon: customize,
   },
   {

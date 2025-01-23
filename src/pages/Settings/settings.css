@@ -19,26 +19,8 @@
     position: relative;
     position: relative;
   }
-  .settings-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row-reverse;
-    position: absolute; 
-    top: 0;
-  }
-  .settings-heading {
-    font-size: clamp(1.5rem, 5vw, 2rem);
-    font-weight: 600;
-  }
-  .close-btn.settings {
-    width: 2.6rem !important;
-    height: 2.6rem !important;
-    position: relative !important;
-    top: 0 !important;
-    right: 0 !important;
-  }
+ 
+
   .theme-wrapper {
     display: flex;
     justify-content: space-between;
@@ -51,7 +33,6 @@
     border-radius: 2rem;
   }
   .slider {
-    margin-top: 3rem;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -60,7 +41,6 @@
     background-color: var(--dark-alt);
     max-width: 200px;
     width: 100%;
-
     height: inherit;
     border-radius: 0 2rem 2rem 0;
     padding: 2rem 0.75rem;

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./form.css";
 import ProfileForm from "./ProfileForm";
 import Project from "./Project";
@@ -58,11 +58,11 @@ function Form() {
         errorMessage: "Description is required",
       },
     };
-  
+
     ["company", "client", "project"].forEach((section) => {
       let sectionValid = true;
       const updatedSection = { ...form[section] };
-  
+
       Object.keys(updatedSection).forEach((key) => {
         const field = updatedSection[key];
 
@@ -89,55 +89,55 @@ function Form() {
           }
         }
       });
-  
+
       if (!sectionValid) overallValid = false;
-  
+
       dispatchForm({
         type: "VALIDATE_FORM",
         payload: { sectionToValidate: section, updatedSection },
       });
     });
-  
+
     // Validate items and combine validity
     const itemsValid = validateItems();
-  
+
     // Combine field validation and items validation
     overallValid = overallValid && itemsValid;
-  
+
     return overallValid;
   };
-  
+
   const validateItems = () => {
     const updatedItems = form.items.map((item) => {
       let isValid = true;
       const updatedItem = { ...item };
-  
+
       if (item.productName.value.trim() === "") {
         updatedItem.productName.valid = false;
         updatedItem.productName.errorMessage = "Item name is required";
         isValid = false;
       }
-  
+
       if (isNaN(item.quantity.value) || item.quantity.value.trim() === "") {
         updatedItem.quantity.valid = false;
         updatedItem.quantity.errorMessage = "Quantity must be a number";
         isValid = false;
       }
-  
+
       if (isNaN(item.price.value) || item.price.value.trim() === "") {
         updatedItem.price.valid = false;
         updatedItem.price.errorMessage = "Price must be a number";
         isValid = false;
       }
-  
+
       return { ...updatedItem, valid: isValid };
     });
-  
+
     dispatchForm({
       type: "VALIDATE_ITEMS",
       payload: { items: updatedItems },
     });
-  
+
     return updatedItems.every((item) => item.valid);
   };
   const data = {
@@ -156,6 +156,16 @@ function Form() {
       type: "button",
     },
   };
+  useEffect(() => {
+    if (form.showForm) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [form.showForm]);
   return (
     <article className="form-wrapper">
       <form className="form-container">

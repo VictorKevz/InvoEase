@@ -28,7 +28,6 @@ function Navbar() {
                   `nav-link ${isActive ? "active-link" : ""}`
                 }
               >
-                <link.icon className="nav-icon" />
                 <span className="nav-link-text">{link.title}</span>
               </NavLink>
             </li>
@@ -36,17 +35,13 @@ function Navbar() {
         </ul>
       </nav>
       <div className="settings-profile-wrapper">
-        <NavLink
-          to="/settings"
-          className={({ isActive }) =>
-            `nav-link ${isActive ? "active-link settings" : ""}`
-          }
-        >
-          <Settings /> <span className="nav-link-text">Settings</span>
-        </NavLink>
-        <div className="profile">
+        <NavLink 
+        className={({ isActive }) =>
+          `profile ${isActive ? "active-settings" : ""}`
+        } 
+        to="/settings">
           <img src={avatar} className="avatar-img" />
-        </div>
+        </NavLink>
       </div>
     </header>
   );
