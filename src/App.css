@@ -88,16 +88,17 @@
   .profile {
     border: none !important;
   }
-  /* (2) Form */
+  /* (2) Form .....................*/
   .form-wrapper {
     top: 105px !important;
-    position: absolute !important;
-    align-items: stretch !important;
+    height: calc(100vh - 105px) !important;
   }
   .form-container {
-    padding: 3.5rem 1.5rem 0 3.5rem !important;
+    padding: 3.5rem 1.5rem 2rem 3.5rem !important;
   }
   .form-content {
     height: 550px !important;
+
   }
+ 
 }
