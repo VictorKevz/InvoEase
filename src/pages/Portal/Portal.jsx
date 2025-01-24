@@ -14,9 +14,12 @@ function Portal() {
       <header className="portal-header">
         <div className="portal-text-wrapper">
           <h1 className="portal-title">Invoices</h1>
-          <p className="portal-parag">{`There are ${
+          <p className="portal-parag desktop">{`There are ${
             totalInvoices > 0 ? totalInvoices : 0
           } total invoices`}</p>
+          <p className="portal-parag mobile">{`${ 
+            totalInvoices > 0 ? totalInvoices : 0
+          } invoices`}</p>
         </div>
         <div className="filter-newInvoice-wrapper">
           <div className="filter-wrapper">
@@ -25,7 +28,7 @@ function Portal() {
               className="filter-button"
               onClick={() => dispatchInvoice({ type: "TOGGLE_STATUS" })}
             >
-              Filter by status
+              Filter<span className="filter-subtext">by status</span>
               {invoice.showStatus ? (
                 <KeyboardArrowUp className="arrow-menu" />
               ) : (
@@ -47,12 +50,11 @@ function Portal() {
             <span className="add-icon">
               <Add />
             </span>
-            New Invoice
+            New <span className="invoice-subtext"> Invoice</span>
           </button>
         </div>
       </header>
       <InvoiceCard />
-      
     </section>
   );
 }

@@ -8,8 +8,14 @@ import InvoiceButton from "../../components/InvoiceButton";
 import Modal from "../../components/Modal/Modal";
 import { useReactToPrint } from "react-to-print";
 function DetailsInvoicePage() {
-  const { invoice, settings, filteredData, dispatchForm, formatCurrency, formatDate } =
-    useContext(DataContext);
+  const {
+    invoice,
+    settings,
+    filteredData,
+    dispatchForm,
+    formatCurrency,
+    formatDate,
+  } = useContext(DataContext);
 
   const { id } = useParams();
   const currentObj = invoice?.invoiceData?.find((obj) => obj?.id === id);
@@ -54,16 +60,20 @@ function DetailsInvoicePage() {
       </header>
       <div className="detailsPage-content-wrapper">
         <div className="details-actions-card">
-          <p className="details-status">
+          <span className="details-status">
             Status <StatusBar obj={currentObj} />
-          </p>
-          <div className="edit-delete-paid-wrapper">
+          </span>
+          <div className="edit-delete-paid-wrapper desktop">
             {!isPaid && <InvoiceButton data={editData} />}
             <InvoiceButton data={deleteData} />
             {isPending && <InvoiceButton data={paidData} />}
           </div>
         </div>
-        <section className="details-content-card" ref={contentRef} style={{fontFamily: settings.fontTheme}}>
+        <section
+          className="details-content-card"
+          ref={contentRef}
+          style={{ fontFamily: settings.fontTheme }}
+        >
           <header className="detailsPage-invoice-address">
             <div className="company-client-address-wrapper">
               <div className="company-avatar-print">
@@ -103,32 +113,47 @@ function DetailsInvoicePage() {
             </div>
             <div className="date">
               <p className="details-label">Invoice Date</p>
-              <span className="details-value">{formatDate(currentObj?.createdAt)}</span>
+              <span className="details-value">
+                {formatDate(currentObj?.createdAt)}
+              </span>
             </div>
             <div className="due">
               <p className="details-label">Due Date</p>
-              <span className="details-value">{formatDate(currentObj?.paymentDue)}</span>
+              <span className="details-value">
+                {formatDate(currentObj?.paymentDue)}
+              </span>
             </div>
           </div>
           <div className="details-invoice-wrapper">
             <h2 className="invoice-id">Invoice #{currentObj?.id}</h2>
             <header className="items-header">
-              {items.map((item) => (
-                <span className="item-header" key={item}>
-                  {item}
-                </span>
+              {items.map((item, i) => (
+                <div className="item-header">
+                  {i === 0 ? (
+                    <span className="item-label">{item}</span>
+                  ) : (
+                    <div className="qty-price-total-wrapper">
+                      <span className="item-label ">{item}</span>
+                    </div>
+                  )}
+                </div>
               ))}
             </header>
             <ul className="items-list">
               {currentObj?.items.map((item) => (
                 <li className="item" key={item.name}>
                   <span className="item-value">{item?.name}</span>
-                  <span className="item-value">{item?.quantity}</span>
-                  <span className="item-value">
+                  <span className="item-value desktop">{item?.quantity}</span>
+                  <span className="item-value desktop">
                     {formatCurrency(item?.price)}
                   </span>
-                  <span className="item-value">
+                  <span className="item-value total">
                     {formatCurrency(item?.total)}
+                  </span>
+                  <span className="qty-price-wrapper mobile">
+                    <span className="item-value qty-price">
+                      {item?.quantity} x {formatCurrency(item?.price)}
+                    </span>
                   </span>
                 </li>
               ))}
@@ -141,6 +166,11 @@ function DetailsInvoicePage() {
             </div>
           </div>
         </section>
+        <div className="edit-delete-paid-wrapper mobile">
+          {!isPaid && <InvoiceButton data={editData} />}
+          <InvoiceButton data={deleteData} />
+          {isPending && <InvoiceButton data={paidData} />}
+        </div>
       </div>
       {invoice.warningModal.show && <Modal />}
     </div>

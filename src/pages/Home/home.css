@@ -34,7 +34,10 @@
 .mark {
   color: var(--secondary-color);
 }
-
+.home-image {
+  width: 100%;
+  height: auto;
+}
 .home-features {
   display: flex;
   justify-content: center;
@@ -44,20 +47,19 @@
   width: 100%;
 }
 .feature-title {
-  font-size: 2.5rem;
+  font-size:clamp(1.85rem, 5vw, 2.5rem);
   font-weight: 700;
   margin-bottom: 1rem;
+  text-align: center;
 }
 .feature-card-wrapper {
   display: grid;
   grid-template-columns: repeat(3,1fr);
   gap: 1.5rem;
-  /* justify-content: center;
-  place-items: center;
-  place-content: center; */
   margin-top: 2rem;
   max-width: 1440px;
   width: 100%;
+  padding: 2rem 0;
 }
 .feature-card {
   display: flex;

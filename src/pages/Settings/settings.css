@@ -63,7 +63,7 @@
   }
   .slider-icon {
     font-size: 1.5rem !important;
-    color: var(--white);
+    color: var(--neutral-light);
     opacity: 0.8;
   }
   /* .active-icon {

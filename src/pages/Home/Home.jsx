@@ -33,7 +33,7 @@ function Home() {
       </header>
 
       <div className="home-features">
-        <h2 className="feature-title">Why Choose InvoEase?</h2>
+        <h2 className="feature-title">Why InvoEase?</h2>
         <div className="feature-card-wrapper">
           {homeData.map((feature) => (
             <div key={feature.id} className="feature-card">
@@ -42,7 +42,7 @@ function Home() {
               </span>
               <h2 className="feature-card-title">{feature.title}</h2>
               <p className="feature-parag">{feature.parag}</p>
-              <Link to="/portal" className="feature-link">Create Invoice</Link>
+              <Link to={feature.url} className="feature-link">{feature.cta}</Link>
             </div>
           ))}
         </div>

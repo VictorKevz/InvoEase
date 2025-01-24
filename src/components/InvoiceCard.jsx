@@ -22,6 +22,7 @@ function InvoiceCard() {
               aria-label={`View details for invoice ${obj?.id}`}
               >
                 <article className="invoice-card-content">
+                  <div className="invoice-id-due-total-wrapper">
                   <h2 className="card-title">
                     <span className="hash-sign">#</span>
                     {obj?.id}
@@ -29,13 +30,21 @@ function InvoiceCard() {
                   <p className="due-date">
                     Due {formatDate(obj?.paymentDue)}
                   </p>
-                  <p className="client-name">{obj?.client?.name}</p>
-                  <div className="total-status-wrapper">
-                    <p className="total">
+                  <p className="total mobile">
                       {formatCurrency(obj?.total)} 
                     </p>
+                  </div>
+                  
+                  <p className="client-name desktop">{obj?.client?.name}</p>
+                  
+                  <div className="total-status-wrapper">
+                    <p className="total desktop">
+                      {formatCurrency(obj?.total)} 
+                    </p>
+                    <p className="client-name mobile">{obj?.client?.name}</p>
+
                     <StatusBar obj={obj} />
-                    <KeyboardArrowRight className="arrow-icon" aria-hidden="true" />
+                    <KeyboardArrowRight className="arrow-icon card" aria-hidden="true" />
                   </div>
                 </article>
               </Link>

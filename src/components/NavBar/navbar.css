@@ -17,7 +17,7 @@
   align-items: center;
   flex-direction: column;
   height: 103px;
-  background-color: var(--dark-alt);
+  /* background-color: var(--dark-alt); */
   width: 100%;
   position: relative;
   background-color: var(--primary-color);

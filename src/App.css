@@ -44,8 +44,12 @@
   background: #f9fafe !important;
   color: var(--accent-purple) !important;
 }
-
+.mobile {
+  display: none !important;
+}
 /* MEDIA QUERIES FOR THE WHOLE APPLICATION */
+/* TABLET SCREEN STYLES .....................*/
+
 @media screen and (max-width: 1024px) {
   /* (1) NAVBAR */
   .outer-container {
@@ -83,7 +87,7 @@
   }
   .active-link {
     border-radius: 1.25rem !important;
-    padding: .5rem 1rem!important;
+    padding: 0.5rem 1rem !important;
   }
   .profile {
     border: none !important;
@@ -98,7 +102,135 @@
   }
   .form-content {
     height: 550px !important;
-
   }
- 
+  /* (3) HOME .....................*/
+  .home-header {
+    flex-direction: column-reverse !important;
+    margin-top: 3rem !important;
+  }
+  .home-text-wrapper {
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .feature-card-wrapper {
+    grid-template-columns: 1fr 1fr !important;
+    row-gap: 4rem !important;
+  }
+  .feature-card:nth-child(3) {
+    grid-column: span 2 !important;
+  }
+}
+
+/* MOBILE SCREEN STYLES .....................*/
+@media screen and (max-width: 768px) {
+  .logo-item {
+    height: 90px !important;
+    width: 72px !important;
+  }
+
+  /* (1) INVOICE CARDS AND FILTERS .....................*/
+
+  .filter-newInvoice-wrapper {
+    gap: 1.2rem !important;
+  }
+  .filter-subtext,
+  .invoice-subtext {
+    display: none !important;
+  }
+  .new-invoice-btn {
+    min-width: fit-content !important;
+    width: fit-content !important;
+  }
+  .add-icon {
+    margin-right: 0.5rem !important;
+  }
+  .invoice-card-content {
+    padding: 1.5rem !important;
+    align-items: flex-start !important;
+  }
+  .invoice-id-due-total-wrapper {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    align-items: flex-start !important;
+  }
+  .total-status-wrapper {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    align-items: flex-end !important;
+  }
+  .client-name.mobile {
+    text-align: right !important;
+  }
+  .mobile {
+    display: flex !important;
+  }
+  .desktop,
+  .arrow-icon.card {
+    display: none !important;
+  }
+  /* (2) HOME PAGE .....................*/
+  .feature-card-wrapper {
+    grid-template-columns: 1fr !important;
+    max-width: 500px !important;
+  }
+  .feature-card:nth-child(3) {
+    grid-column: span 1 !important;
+  }
+  /* (3) FORM COMPONENT .....................*/
+  .form-container {
+    max-width: 100% !important;
+    padding: 3rem 1.5rem !important;
+    border-radius: 0 !important;
+  }
+  /* (4) DETAILS PAGE.....................*/
+  .details-status {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+  .edit-delete-paid-wrapper.mobile{
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+  }
+  .items-header {
+    display: none !important;
+  }
+
+  .item {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .qty-price-wrapper {
+    width: 100%;
+  }
+  .item-value.qty-price {
+    color: var(--accent-purple) !important;
+    font-weight: normal;
+  }
+  /* (5) SETTINGS PAGE .....................*/
+  .wrapper.settings {
+    min-height: 70vh !important;
+  }
+  .theme-wrapper {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    padding: 2rem 1.5rem !important;
+  }
+  .slider {
+    max-width: 100% !important;
+    flex-direction: row !important;
+    border-radius: 1rem !important;
+    padding: 1rem !important;
+  }
+  .slider-text {
+    display: none !important;
+  }
+  .slider-btn {
+    width: fit-content !important;
+    border: 1px solid var(--neutral-light) !important;
+    border-radius: 0.5rem !important;
+  }
 }
