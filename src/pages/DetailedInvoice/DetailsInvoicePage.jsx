@@ -159,7 +159,7 @@ function DetailsInvoicePage() {
               ))}
             </ul>
             <div className="details-total-wrapper">
-              <p className="total-label">Grand Total</p>
+              <p className="total-label">Total</p>
               <span className="details-total-value">
                 {formatCurrency(currentObj?.total)}
               </span>

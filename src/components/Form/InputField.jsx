@@ -25,7 +25,7 @@ function InputField({ field, section, id }) {
   const isItemsValid = currentObj?.[itemKey]?.valid;
   return (
     <label className={`form-label ${field.id}`} htmlFor={field.uniqueId}>
-      {field?.label}
+      <span className={`form-label-text ${section === "items" && "hide-items-label"}`}>{field?.label}</span>
       {field.type === "file" ? (
         <div className="custom-file-wrapper">
           <input
@@ -65,7 +65,7 @@ function InputField({ field, section, id }) {
           placeholder={field.placeholder}
           onChange={handleChange}
           className={`input-field ${field.id} ${!isValid && "error-border"}  ${
-            section === "items" && "items"
+            section === "items" && "items-field"
           } `}
         />
       )}

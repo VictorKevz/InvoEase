@@ -203,7 +203,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  max-width: 300px;
+  /* max-width: 300px; */
   width: 100%;
   margin-left: auto;
 }
@@ -232,7 +232,7 @@
 .item-value {
   color: var(--white);
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: .9rem;
 }
 .details-total-wrapper {
   width: 100%;
@@ -251,7 +251,7 @@
   color: var(--neutral-light);
 }
 .details-total-value {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
   font-weight: bold;
   color: var(--light-text);
 }

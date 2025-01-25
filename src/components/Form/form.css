@@ -87,25 +87,27 @@
   font-size: 1rem;
   color: var(--neutral-dark);
 }
-
+.items-field{
+  padding: 0 .25rem;
+}
 .form-label {
   width: 100%;
   font-size: 0.8735rem;
   color: var(--neutral-light);
   position: relative;
 }
-
+.hide-items-label {
+  display: none;
+}
 .field.company-field {
   width: 100%;
 }
 .company-field.address,
-.client-field.address {
-  grid-column: span 2;
-}
-.company-field.logo,
-.client-field.avatar {
-  grid-column: span 2;
-}
+  .client-field.address,
+  .company-field.logo,
+  .client-field.avatar {
+    grid-column: span 2;
+  }
 .form-label.logo {
   width: 100%;
   display: flex;
@@ -183,7 +185,7 @@ input[type="file"]::-webkit-file-upload-button {
   gap: .5rem;
 }
 /* ERROR STATES */
-.input-field.error-border:not(.items) {
+.input-field.error-border:not(.items-field) {
   border:1px solid var(--error-red) !important;
   background-color: rgba(241, 76, 76, 0.211)!important;
 }

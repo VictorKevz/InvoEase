@@ -6,12 +6,15 @@
     margin-bottom: 1.5rem;
     color: var(--primary-color);
 }
-.items-field{
+
+.items-field,.items-form-header{
     width: 100%;
     display: grid;
     grid-template-columns: 4fr 1fr 2fr 2fr ;
     gap: 1rem;
     position: relative;
+    place-items: center;
+    justify-items: left;
 }
 .form-label.total{
 display: flex;
@@ -21,7 +24,9 @@ height: 100%;
 justify-content: space-between;
 }
 .total-value{
-    margin-bottom: 1.2rem;
+   font-weight: bold;
+   font-size: 1rem;
+
 }
 .add-btn{
     width: 100%;
@@ -36,7 +41,7 @@ justify-content: space-between;
 .delete-btn{
     position: absolute;
     right: 0;
-    top: 50%;
+    top: 30%;
     color: var(--neutral-dark);
 }
 .disabled{

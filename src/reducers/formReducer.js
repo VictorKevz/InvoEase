@@ -172,6 +172,7 @@ export const formReducer = (state, action) => {
           {
             id: uuidv4(),
             productName: {
+              label: "Item Name",
               id: `productName-${uniqueId}`,
               uniqueId: uuidv4(),
               placeholder: "Item Name",
@@ -181,6 +182,7 @@ export const formReducer = (state, action) => {
             },
             quantity: {
               id: `quantity-${uniqueId}`,
+              label: "Qty",
               uniqueId: uuidv4(),
               value: "",
               type: "text",
@@ -188,6 +190,7 @@ export const formReducer = (state, action) => {
             },
             price: {
               id: `price-${uniqueId}`,
+              label: "Price",
               uniqueId: uuidv4(),
               value: "",
               type: "text",
