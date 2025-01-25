@@ -67,6 +67,16 @@
   padding-left:1rem ;
 
 }
+.nav-link:hover {
+  background-color: var(--primary-color);
+  color: var(--light-text);
+  border-radius: 0 1.25rem 1.25rem 0;
+  width: 100%;
+  padding: 0.5rem 0;
+  justify-content: flex-start;
+  padding-left:1rem ;
+  display: flex;
+}
 .active-link {
   background-color: var(--secondary-color);
   color: var(--light-text);
@@ -89,6 +99,10 @@
   justify-content: center;
   padding: 1.5rem 0;
   border-top: 1px solid #494e6e;
+}
+.avatar-img:hover {
+  transform: translateY(-0.25rem) scale(1.05);
+transition: all 0.3s ease;
 }
 .avatar-img {
   width: 40px;

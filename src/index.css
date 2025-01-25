@@ -26,7 +26,7 @@
 /* Light Theme Overrides */
 .light {
   --dark-bg: #ffffff; /* White Background */
-  --dark-alt: #f8f9fa; /* Light Alt Background */
+  --dark-alt: #e5e6e8; /* Light Alt Background */
 
   /* Neutral Colors */
   --neutral-light: #7e88c3; /* Muted Neutral Text */

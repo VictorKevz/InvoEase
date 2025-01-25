@@ -44,7 +44,7 @@ const Settings = () => {
     >
       <div className="settings-container" key={settings.currentTab}>
         <motion.article className="theme-wrapper">
-          <div className="slider">
+          <nav className="sidebar-wrapper">
             {settingsData.map((obj) => {
               const isActive = settings.currentTab === obj.id;
               return (
@@ -67,7 +67,7 @@ const Settings = () => {
                 </button>
               );
             })}
-          </div>
+          </nav>
           <motion.div
             className="theme-content-wrapper"
             variants={tabVariants(direction)}

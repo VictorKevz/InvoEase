@@ -94,8 +94,8 @@
   }
   /* (2) Form .....................*/
   .form-wrapper {
-    top: 105px !important;
-    height: calc(100vh - 105px) !important;
+    top: 5rem !important;
+    height: calc(100vh - 5rem) !important;
   }
   .form-container {
     padding: 3.5rem 1.5rem 2rem 3.5rem !important;
@@ -181,6 +181,11 @@
     max-width: 100% !important;
     padding: 3rem 1.5rem !important;
     border-radius: 0 !important;
+    height: 100vh !important;
+  }
+  .form-wrapper {
+    top: 105px !important;
+    /* height: 100vh !important; */
   }
   /* (4) DETAILS PAGE.....................*/
   .details-status {
@@ -189,7 +194,7 @@
     justify-content: space-between !important;
     align-items: center !important;
   }
-  .edit-delete-paid-wrapper.mobile{
+  .edit-delete-paid-wrapper.mobile {
     display: flex !important;
     justify-content: flex-end !important;
     align-items: center !important;
@@ -219,7 +224,7 @@
     gap: 1.5rem !important;
     padding: 2rem 1.5rem !important;
   }
-  .slider {
+  .sidebar-wrapper {
     max-width: 100% !important;
     flex-direction: row !important;
     border-radius: 1rem !important;
