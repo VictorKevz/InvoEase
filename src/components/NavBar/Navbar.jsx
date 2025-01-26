@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../assets/images/logo.svg";
 import avatar from "../../assets/images/image-avatar.jpg";
-import { NavLink, useParams } from "react-router-dom";
-import { Home, Receipt, Settings } from "@mui/icons-material";
+import { NavLink } from "react-router-dom";
+import { Home, Receipt } from "@mui/icons-material";
 import "./navbar.css";
+import { DataContext } from "../../App";
 
 function Navbar() {
+  const { dispatchForm, form } = useContext(DataContext);
   const navLinks = [
     { title: "Home", path: "/", icon: Home },
     { title: "Portal", path: "/portal", icon: Receipt },
   ];
-  const { current } = useParams();
-  const isSettings = current === "settings";
   return (
     <header className="navbar-wrapper">
       <NavLink to="/" className="logo-item">
@@ -27,6 +27,9 @@ function Navbar() {
                 className={({ isActive }) =>
                   `nav-link ${isActive ? "active-link" : ""}`
                 }
+                onClick={() => {
+                  form.showForm ? dispatchForm({ type: "RESET_FORM" }) : null;
+                }}
               >
                 <span className="nav-link-text">{link.title}</span>
               </NavLink>
@@ -35,11 +38,15 @@ function Navbar() {
         </ul>
       </nav>
       <div className="settings-profile-wrapper">
-        <NavLink 
-        className={({ isActive }) =>
-          `profile ${isActive ? "active-settings" : ""}`
-        } 
-        to="/settings">
+        <NavLink
+          className={({ isActive }) =>
+            `profile ${isActive ? "active-settings" : ""}`
+          }
+          to="/settings"
+          onClick={() => {
+            form.showForm ? dispatchForm({ type: "RESET_FORM" }) : null;
+          }}
+        >
           <img src={avatar} className="avatar-img" />
         </NavLink>
       </div>

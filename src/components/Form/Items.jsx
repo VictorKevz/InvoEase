@@ -3,11 +3,14 @@ import { DataContext } from "../../App";
 import InputField from "./InputField";
 import { Add, Delete } from "@mui/icons-material";
 import "./items.css";
+import { useFormatCurrency } from "../../hooks/useFormatCurrency";
 
 function Items() {
-  const { form, dispatchForm,formatCurrency } = useContext(DataContext);
+  const { form, dispatchForm } = useContext(DataContext);
   const headings = ["Item Name", "Qty", "Price", "Total"];
   const isDisabled = form?.items?.length === 1;
+
+  const formatCurrency = useFormatCurrency();
   return (
     <div className="items-wrapper">
       <h3 className="items-title">Item List</h3>

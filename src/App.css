@@ -216,7 +216,8 @@
   }
   /* (5) SETTINGS PAGE .....................*/
   .wrapper.settings {
-    min-height: 70vh !important;
+    min-height: 0 !important;
+    margin-block: 5rem 2rem !important;
   }
   .theme-wrapper {
     flex-direction: column !important;
@@ -300,5 +301,15 @@
   .btn.markPaid,
   .btn.send {
     width: 100% !important;
+  }
+   /* (3) SETTINGS PAGE .....................*/
+ 
+  .settings-container {
+    padding: 0!important;
+  }
+  .theme-wrapper {
+    padding: 0 !important;
+    border-radius: 0!important;
+    background: none!important;
   }
 }

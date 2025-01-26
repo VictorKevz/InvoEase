@@ -7,13 +7,13 @@ import "./detailsPage.css";
 import InvoiceButton from "../../components/InvoiceButton";
 import Modal from "../../components/Modal/Modal";
 import { useReactToPrint } from "react-to-print";
+import { useFormatCurrency } from "../../hooks/useFormatCurrency";
 function DetailsInvoicePage() {
   const {
     invoice,
     settings,
     filteredData,
     dispatchForm,
-    formatCurrency,
     formatDate,
   } = useContext(DataContext);
 
@@ -51,6 +51,7 @@ function DetailsInvoicePage() {
   const contentRef = useRef(null);
 
   const reactToPrintFn = useReactToPrint({ contentRef });
+  const formatCurrency = useFormatCurrency();
   return (
     <div className="wrapper detailsPage">
       <header className="detailsPage-header">
@@ -128,7 +129,7 @@ function DetailsInvoicePage() {
             <h2 className="invoice-id">Invoice #{currentObj?.id}</h2>
             <header className="items-header">
               {items.map((item, i) => (
-                <div className="item-header">
+                <div key={i} className="item-header">
                   {i === 0 ? (
                     <span className="item-label">{item}</span>
                   ) : (

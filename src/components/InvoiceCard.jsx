@@ -4,12 +4,11 @@ import { Link } from "react-router-dom";
 import { KeyboardArrowRight } from "@mui/icons-material";
 import empty from "../assets/images/illustration-empty.svg";
 import StatusBar from "./StatusBar";
+import { useFormatCurrency } from "../hooks/useFormatCurrency";
 function InvoiceCard() {
-  const { invoice, settings, filteredData,formatCurrency,formatDate } = useContext(DataContext);
+  const { filteredData, formatDate } = useContext(DataContext);
 
-  
-
-
+  const formatCurrency = useFormatCurrency();
 
   return (
     <>
@@ -17,34 +16,36 @@ function InvoiceCard() {
         <ul className="invoice-card-list" aria-labelledby="invoice-list">
           {filteredData?.map((obj) => (
             <li key={obj?.id} className="link-item">
-              <Link to={`/details/${obj?.id}`} 
-              className="invoice-card"
-              aria-label={`View details for invoice ${obj?.id}`}
+              <Link
+                to={`/details/${obj?.id}`}
+                className="invoice-card"
+                aria-label={`View details for invoice ${obj?.id}`}
               >
                 <article className="invoice-card-content">
                   <div className="invoice-id-due-total-wrapper">
-                  <h2 className="card-title">
-                    <span className="hash-sign">#</span>
-                    {obj?.id}
-                  </h2>
-                  <p className="due-date">
-                    Due {formatDate(obj?.paymentDue)}
-                  </p>
-                  <p className="total mobile">
-                      {formatCurrency(obj?.total)} 
+                    <h2 className="card-title">
+                      <span className="hash-sign">#</span>
+                      {obj?.id}
+                    </h2>
+                    <p className="due-date">
+                      Due {formatDate(obj?.paymentDue)}
                     </p>
+                    <p className="total mobile">{formatCurrency(obj?.total)}</p>
                   </div>
-                  
+
                   <p className="client-name desktop">{obj?.client?.name}</p>
-                  
+
                   <div className="total-status-wrapper">
                     <p className="total desktop">
-                      {formatCurrency(obj?.total)} 
+                      {formatCurrency(obj?.total)}
                     </p>
                     <p className="client-name mobile">{obj?.client?.name}</p>
 
                     <StatusBar obj={obj} />
-                    <KeyboardArrowRight className="arrow-icon card" aria-hidden="true" />
+                    <KeyboardArrowRight
+                      className="arrow-icon card"
+                      aria-hidden="true"
+                    />
                   </div>
                 </article>
               </Link>

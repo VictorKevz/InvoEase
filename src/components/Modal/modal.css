@@ -42,7 +42,7 @@
     gap: .5rem;
 }
 .modal-title{
-    font-size: 1.55rem;
+    font-size: clamp(1.25rem, 2vw, 2rem);
     font-weight: bold;
     color: var(--white);
 }
