@@ -5,14 +5,21 @@ import { Add, KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import Filters from "../../components/Filters";
 import "./portal.css";
 import InvoiceCard from "../../components/InvoiceCard";
-
+import { motion } from "framer-motion";
+import { portalVariants } from "../../variants";
 
 function Portal() {
   const { invoice, dispatchInvoice, filteredData, t, dispatchForm } =
     useContext(DataContext);
   const totalInvoices = filteredData?.length;
   return (
-    <section className="wrapper portal">
+    <motion.section 
+    className="wrapper portal"
+    variants={portalVariants}
+    initial="initial"
+    animate="visible"
+    exit="exit"
+    >
       <header className="portal-header">
         <div className="portal-text-wrapper">
           <h1 className="portal-title">{t("Invoices")}</h1>
@@ -41,7 +48,7 @@ function Portal() {
           </div>
           <button
             type="button"
-            className="new-invoice-btn"
+            className="btn new-invoice-btn"
             onClick={() =>
               dispatchForm({
                 type: "SHOW_FORM_ITEMS",
@@ -57,7 +64,7 @@ function Portal() {
         </div>
       </header>
       <InvoiceCard />
-    </section>
+    </motion.section>
   );
 }
 

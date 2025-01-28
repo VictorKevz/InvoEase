@@ -3,14 +3,21 @@ import { DataContext } from "../../App";
 import { Delete, Paid } from "@mui/icons-material";
 import "./modal.css";
 import { Link } from "react-router-dom";
-
+import { motion } from "framer-motion";
+import { modalVariants } from "../../variants";
 function Modal({}) {
   const { invoice, dispatchInvoice, t } = useContext(DataContext);
   const { title, message, modalId } = invoice.warningModal;
   const isDelete = title === "Confirm Deletion";
   return (
     <div className="wrapper modal">
-      <article className="modal-container">
+      <motion.article
+        className="modal-container"
+        variants={modalVariants}
+        initial="initial"
+        animate="visible"
+        exit="exit"
+      >
         <header className="modal-header">
           <span
             className={`modal-icon-wrapper ${isDelete ? "delete" : "paid"}`}
@@ -47,7 +54,7 @@ function Modal({}) {
             {isDelete ? t("Delete") : t("Mark as Paid")}
           </Link>
         </footer>
-      </article>
+      </motion.article>
     </div>
   );
 }

@@ -8,6 +8,9 @@ import InvoiceButton from "../../components/InvoiceButton";
 import Modal from "../../components/Modal/Modal";
 import { useReactToPrint } from "react-to-print";
 import { useFormatCurrency } from "../../hooks/useFormatCurrency";
+import { motion } from "framer-motion";
+import { pageVariants } from "../../variants";
+
 function DetailsInvoicePage() {
   const { invoice, settings, formatDate, t } = useContext(DataContext);
 
@@ -50,7 +53,13 @@ function DetailsInvoicePage() {
   const locale = settings.locale || "en-GB";
 
   return (
-    <div className="wrapper detailsPage">
+    <motion.div 
+    className="wrapper detailsPage"
+    variants={pageVariants}
+    initial="initial"
+    animate="visible"
+    exit="exit"
+    >
       <header className="detailsPage-header">
         <Link to="/portal" className="go-back-link">
           <KeyboardArrowLeft className="arrow-icon" /> 
@@ -172,7 +181,7 @@ function DetailsInvoicePage() {
         </div>
       </div>
       {invoice.warningModal.show && <Modal />}
-    </div>
+    </motion.div>
   );
 }
 

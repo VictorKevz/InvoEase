@@ -3,6 +3,8 @@ import React, { useContext } from "react";
 import { DataContext } from "../../../App";
 import "../form.css";
 import { formatWord } from "../../../utils/formatWord";
+import { AnimatePresence, motion } from "framer-motion";
+import { pageVariants } from "../../../variants";
 
 
 function DropDown({ data, isOpen, toggleStateKey, name, selected, caption }) {
@@ -27,7 +29,15 @@ function DropDown({ data, isOpen, toggleStateKey, name, selected, caption }) {
           <KeyboardArrowDown className="arrow-icon" />
         )}
       </button>
-      <ul  className={`dropdown-list ${isOpen ? "open" : "close"}`}>
+      <AnimatePresence mode="wait">
+      <motion.ul  
+      className={`dropdown-list ${isOpen ? "open" : "close"}`}
+      variants={pageVariants}
+      initial="initial"
+      animate="visible"
+      exit="exit"
+      key={toggleStateKey}
+      >
       {data.map((item) => {
         return (
           <React.Fragment key={item.value}>
@@ -56,7 +66,8 @@ function DropDown({ data, isOpen, toggleStateKey, name, selected, caption }) {
           </React.Fragment>
         );
       })} 
-      </ul>
+      </motion.ul>
+      </AnimatePresence>
     </div>
   );
 }

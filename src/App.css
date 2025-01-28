@@ -22,7 +22,7 @@
   height: 48px !important;
   border-radius: 1.5rem !important;
   padding: 0 1.2rem !important;
-  color: var(--white) !important;
+  color: var(--light-text) !important;
   font-size: 0.9375rem;
   font-weight: bold;
   background: var(--neutral-light);
@@ -44,6 +44,24 @@
 .btn.discard {
   background: #f9fafe !important;
   color: var(--accent-purple) !important;
+}
+.btn:hover {
+  transform: translateY(-0.1rem) scale(1.02);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+.btn.edit:hover {
+  color: var(--secondary-color) !important;
+}
+.btn.delete:hover {
+  color: var(--error-red) !important;
+  border: 1px solid var(--error-red) !important;
+  background-color: inherit !important;
+}
+.btn.markPaid:hover{
+  color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+  background-color: inherit !important;
 }
 .mobile {
   display: none !important;
@@ -313,17 +331,17 @@
     border-radius: 0 !important;
     background: none !important;
   }
-
 }
 /* SMALLEST SCREEN STYLES .....................*/
-@media (max-width:500px) {
+@media (max-width: 500px) {
   .modal-footer {
     width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
   }
-  .btn.cancel,.btn.paid {
+  .btn.cancel,
+  .btn.paid {
     width: 100% !important;
   }
   .modal-header {

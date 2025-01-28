@@ -5,6 +5,8 @@ import Project from "./Project";
 import Items from "./Items";
 import FormButton from "./FormComponents/FormButton";
 import { DataContext } from "../../App";
+import {motion } from "framer-motion";
+import { pageVariants } from "../../variants";
 
 function Form() {
   const { form, dispatchForm, dispatchInvoice, t } = useContext(DataContext);
@@ -157,7 +159,14 @@ function Form() {
   };
   return (
     <article className="form-wrapper">
-      <form className="form-container">
+      <motion.form 
+      className="form-container"
+      variants={pageVariants}
+      initial="initial"
+      animate="visible"
+      exit="exit"
+      
+      >
         <header className="form-header">
           <h2 className="form-main-title">
             {form.isEditing
@@ -180,7 +189,7 @@ function Form() {
             <FormButton data={data.send} onSubmit={handleSubmit} />
           </div>
         </div>
-      </form>
+      </motion.form>
     </article>
   );
 }

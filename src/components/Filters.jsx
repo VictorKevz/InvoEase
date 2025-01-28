@@ -2,12 +2,20 @@ import React, { useContext } from "react";
 import { DataContext } from "../App";
 import "./../pages/Portal/portal.css";
 import checkIcon from "../assets/images/icon-check.svg";
+import { motion } from "framer-motion";
+import { modalVariants } from "../variants";
 
 function Filters() {
   const { invoice, dispatchInvoice,t } = useContext(DataContext);
   const filters = ["Draft", "Pending", "Paid"];
   return (
-    <ul className="filter-list">
+    <motion.ul 
+    className="filter-list"
+    variants={modalVariants}
+    initial="initial"
+    animate="visible"
+    exit="exit"
+    >
       {filters.map((filter) => {
         const isSelected = invoice.status.includes(filter.toLowerCase());
         return (
@@ -26,7 +34,7 @@ function Filters() {
           </li>
         );
       })}
-    </ul>
+    </motion.ul>
   );
 }
 
