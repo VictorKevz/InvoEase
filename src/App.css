@@ -18,9 +18,10 @@
 
 .btn {
   width: fit-content !important;
+  min-width: fit-content !important;
   height: 48px !important;
   border-radius: 1.5rem !important;
-  padding: 0 1.5rem !important;
+  padding: 0 1.2rem !important;
   color: var(--white) !important;
   font-size: 0.9375rem;
   font-weight: bold;
@@ -240,7 +241,7 @@
   }
 }
 /* SMALLEST SCREEN STYLES .....................*/
-@media screen and (max-width: 568px) {
+@media screen and (max-width: 600px) {
   /* (1) FORM COMPONENT .....................*/
   .field-wrapper,
   .dropdown-field-wrapper {
@@ -302,14 +303,30 @@
   .btn.send {
     width: 100% !important;
   }
-   /* (3) SETTINGS PAGE .....................*/
- 
+  /* (3) SETTINGS PAGE .....................*/
+
   .settings-container {
-    padding: 0!important;
+    padding: 0 !important;
   }
   .theme-wrapper {
     padding: 0 !important;
-    border-radius: 0!important;
-    background: none!important;
+    border-radius: 0 !important;
+    background: none !important;
+  }
+
+}
+/* SMALLEST SCREEN STYLES .....................*/
+@media (max-width:500px) {
+  .modal-footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .btn.cancel,.btn.paid {
+    width: 100% !important;
+  }
+  .modal-header {
+    flex-direction: column !important;
   }
 }

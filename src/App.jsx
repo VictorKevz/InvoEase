@@ -30,7 +30,6 @@ function App() {
   const [form, dispatchForm] = useReducer(formReducer, initialFormData);
 
   // INVOICE STATE DECLARATION...............................................
-
   const [invoice, dispatchInvoice] = useReducer(
     invoiceReducer,
     initialInvoiceData
@@ -41,15 +40,28 @@ function App() {
   const filteredData = invoice?.invoiceData?.filter((obj) =>
     invoice.status.includes(obj.status)
   );
-
+  useEffect(() => {
+    if (form.showForm || invoice.warningModal.show) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [form.showForm, invoice.warningModal.show]);
   // SETTINGS STATE DECLARATION...................................................
   const [settings, dispatchSettings] = useReducer(
     settingsReducer,
     initialSettings
   );
-
+  useEffect(() => {
+    document.documentElement.className = settings.colorTheme;
+    localStorage.setItem("colorTheme", JSON.stringify(settings.colorTheme));
+  }, [settings.colorTheme]);
+  
   const { t } = useTranslation();
- 
+
   return (
     <DataContext.Provider
       value={{

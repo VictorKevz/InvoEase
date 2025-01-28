@@ -2,8 +2,11 @@ import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import React, { useContext } from "react";
 import { DataContext } from "../../../App";
 import "../form.css";
+import { formatWord } from "../../../utils/formatWord";
+
+
 function DropDown({ data, isOpen, toggleStateKey, name, selected, caption }) {
-  const { dispatchForm } = useContext(DataContext);
+  const { dispatchForm,t } = useContext(DataContext);
   return (
     <div className="dropdown">
       <label className="dropdown-label">{caption}</label>
@@ -17,7 +20,7 @@ function DropDown({ data, isOpen, toggleStateKey, name, selected, caption }) {
           })
         }
       >
-        {selected?.charAt(0).toUpperCase() + selected.slice(1)}
+        {formatWord(selected)}
         {isOpen ? (
           <KeyboardArrowUp className="arrow-icon" />
         ) : (

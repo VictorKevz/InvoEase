@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { DataContext } from "../../../App";
 
 function FormButton({ data, onSubmit }) {
-  const { form, dispatchForm } = useContext(DataContext);
+  const { t, dispatchForm } = useContext(DataContext);
   return (
     <button
       type={data.type}
@@ -15,7 +15,7 @@ function FormButton({ data, onSubmit }) {
           : onSubmit();
       }}
     >
-      {data.text}
+      {t(data.text)}
     </button>
   );
 }

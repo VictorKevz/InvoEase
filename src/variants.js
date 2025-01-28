@@ -19,9 +19,9 @@ export const pageVariants = {
 };
 
 export const tabVariants = (direction) => ({
-    hidden: { y: direction ? 30 : -30, opacity: 0 },
+    hidden: { x: direction ? 30 : -30, opacity: 0 },
     visible: {
-      y: 0,
+      x: 0,
       opacity: 1,
       transition: {
         type: "tween",
@@ -31,7 +31,7 @@ export const tabVariants = (direction) => ({
       },
     },
     exit: {
-      y: direction ? -20 : 20,
+      x: direction ? -20 : 20,
       opacity: 0,
       transition: {
         type: "tween",

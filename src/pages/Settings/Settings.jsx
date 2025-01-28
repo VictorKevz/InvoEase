@@ -6,7 +6,7 @@ import { settingsData } from "./settingsData";
 import { AnimatePresence, motion } from "framer-motion";
 import { pageVariants, tabVariants } from "../../variants";
 import i18n from "../../i18n";
-import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Settings = () => {
   const { settings, dispatchSettings, t } = useContext(DataContext);
@@ -16,24 +16,19 @@ const Settings = () => {
 
   useEffect(() => {
     i18n.changeLanguage(settings.language);
-  }, [settings.language]);
+    localStorage.setItem("language", JSON.stringify(settings.language));
+  }, [settings.language, i18n]);
 
   useEffect(() => {
     localStorage.setItem("currency", JSON.stringify(settings.currency));
     localStorage.setItem("locale", JSON.stringify(settings.locale));
-    localStorage.setItem("colorTheme", JSON.stringify(settings.colorTheme));
     localStorage.setItem("fontTheme", JSON.stringify(settings.fontTheme));
-    localStorage.setItem("language", JSON.stringify(settings.language));
   }, [
     settings.currency,
     settings.locale,
-    settings.language,
-    settings.colorTheme,
     settings.fontTheme,
   ]);
-  useEffect(() => {
-    document.documentElement.className = settings.colorTheme;
-  }, [settings.colorTheme]);
+
   return (
     <motion.section
       className="wrapper settings"
@@ -42,6 +37,7 @@ const Settings = () => {
       animate="visible"
       exit="exit"
     >
+   
       <div className="settings-container" key={settings.currentTab}>
         <motion.article className="theme-wrapper">
           <nav className="sidebar-wrapper">

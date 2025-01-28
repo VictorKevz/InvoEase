@@ -2,8 +2,11 @@ import React, { useContext } from "react";
 import InputField from "./InputField";
 import { DataContext } from "../../App";
 import "./form.css";
+import { formatWord } from "../../utils/formatWord";
+
 function ProfileForm() {
-  const { form, dispatch } = useContext(DataContext);
+
+  const { form, dispatch,t } = useContext(DataContext);
 
   const { name, address, city, postCode, country, email, phone, logo } =
     form.company;
@@ -159,7 +162,7 @@ function ProfileForm() {
         <fieldset key={section} className={`${section}-wrapper`}>
           <legend className={`${section}-header`}>
             <h3 className="field-heading">
-              {section.charAt(0).toUpperCase() + section.slice(1)} Details
+              {t(`${formatWord(section)} Details`)}
             </h3>
           </legend>
           <div className="field-wrapper">

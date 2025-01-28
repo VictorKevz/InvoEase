@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { DataContext } from "../App";
-import { Check } from "@mui/icons-material";
 import "./../pages/Portal/portal.css";
 import checkIcon from "../assets/images/icon-check.svg";
+
 function Filters() {
-  const { invoice, dispatchInvoice } = useContext(DataContext);
+  const { invoice, dispatchInvoice,t } = useContext(DataContext);
   const filters = ["Draft", "Pending", "Paid"];
   return (
     <ul className="filter-list">
@@ -21,7 +21,7 @@ function Filters() {
               <span className={`box ${isSelected && "active-box"}`}>
                 {isSelected && <img src={checkIcon} className="check-img" />}
               </span>{" "}
-              {filter}
+              {t(filter)}
             </button>
           </li>
         );

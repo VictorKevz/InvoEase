@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { DataContext } from "../App";
 
 function InvoiceButton({ data }) {
-  const { dispatchForm, dispatchInvoice, form } = useContext(DataContext);
+  const { dispatchForm, dispatchInvoice, form, t } = useContext(DataContext);
 
   useEffect(() => {
     if (form.isEditing && form.editingObj) {
@@ -32,7 +32,7 @@ function InvoiceButton({ data }) {
             });
       }}
     >
-      {data.text}
+      {t(data.text)}
     </button>
   );
 }

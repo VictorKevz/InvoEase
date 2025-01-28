@@ -9,24 +9,19 @@ import Modal from "../../components/Modal/Modal";
 import { useReactToPrint } from "react-to-print";
 import { useFormatCurrency } from "../../hooks/useFormatCurrency";
 function DetailsInvoicePage() {
-  const {
-    invoice,
-    settings,
-    filteredData,
-    dispatchForm,
-    formatDate,
-  } = useContext(DataContext);
+  const { invoice, settings, formatDate, t } = useContext(DataContext);
 
   const { id } = useParams();
   const currentObj = invoice?.invoiceData?.find((obj) => obj?.id === id);
-
+  const deleteMessage = t("deleteInvoiceConfirmation", { id: currentObj?.id });
+  const markPaidMessage = t("markPaidInvoiceConfirmation", { id: currentObj?.id });
   const deleteData = {
     text: "Delete",
     color: "delete",
     actionType: "SHOW_WARNING_MODAL",
     id: currentObj?.id,
     title: "Confirm Deletion",
-    message: `Are you sure you want to delete invoice #${currentObj?.id}? This action cannot be undone.`,
+    message: deleteMessage,
   };
   const editData = {
     text: "Edit",
@@ -41,7 +36,7 @@ function DetailsInvoicePage() {
     actionType: "SHOW_WARNING_MODAL",
     id: currentObj?.id,
     title: "Confirm Status Change",
-    message: `Are you sure you want to mark invoice #${currentObj?.id} as paid? This action cannot be undone.`,
+    message: markPaidMessage,
   };
   const isPaid = currentObj?.status === "paid";
   const isPending = currentObj?.status === "pending";
@@ -52,17 +47,20 @@ function DetailsInvoicePage() {
 
   const reactToPrintFn = useReactToPrint({ contentRef });
   const formatCurrency = useFormatCurrency();
+  const locale = settings.locale || "en-GB";
+
   return (
     <div className="wrapper detailsPage">
       <header className="detailsPage-header">
         <Link to="/portal" className="go-back-link">
-          <KeyboardArrowLeft className="arrow-icon" /> Go Back
+          <KeyboardArrowLeft className="arrow-icon" /> 
+          {t("Go back")}
         </Link>
       </header>
       <div className="detailsPage-content-wrapper">
         <div className="details-actions-card">
           <span className="details-status">
-            Status <StatusBar obj={currentObj} />
+            {t("Status")} <StatusBar obj={currentObj} />
           </span>
           <div className="edit-delete-paid-wrapper desktop">
             {!isPaid && <InvoiceButton data={editData} />}
@@ -97,7 +95,7 @@ function DetailsInvoicePage() {
                   ))}
                 </address>
                 <address className="address client-address">
-                  <h2 className="client-title">Bill & Ship to</h2>
+                  <h2 className="client-title">{t("Bill & Ship to")}</h2>
                   {Object.keys(currentObj?.client).map((key) => (
                     <p className={`company-label client-${key}`} key={key}>
                       {currentObj?.client?.[key]}
@@ -109,32 +107,32 @@ function DetailsInvoicePage() {
           </header>
           <div className="description-date-due-wrapper">
             <div className="description">
-              <p className="details-label">Project Description</p>
+              <p className="details-label">{t("Project Description")}</p>
               <span className="details-value">{currentObj?.description}</span>
             </div>
             <div className="date">
-              <p className="details-label">Invoice Date</p>
+              <p className="details-label">{t("Invoice Date")}</p>
               <span className="details-value">
-                {formatDate(currentObj?.createdAt)}
+                {formatDate(currentObj?.createdAt, locale)}
               </span>
             </div>
             <div className="due">
-              <p className="details-label">Due Date</p>
+              <p className="details-label">{t("Due Date")}</p>
               <span className="details-value">
-                {formatDate(currentObj?.paymentDue)}
+                {formatDate(currentObj?.paymentDue, locale)}
               </span>
             </div>
           </div>
           <div className="details-invoice-wrapper">
-            <h2 className="invoice-id">Invoice #{currentObj?.id}</h2>
+            <h2 className="invoice-id">{t("Invoice")} #{currentObj?.id}</h2>
             <header className="items-header">
               {items.map((item, i) => (
                 <div key={i} className="item-header">
                   {i === 0 ? (
-                    <span className="item-label">{item}</span>
+                    <span className="item-label">{t(item)}</span>
                   ) : (
                     <div className="qty-price-total-wrapper">
-                      <span className="item-label ">{item}</span>
+                      <span className="item-label ">{t(item)}</span>
                     </div>
                   )}
                 </div>
@@ -160,7 +158,7 @@ function DetailsInvoicePage() {
               ))}
             </ul>
             <div className="details-total-wrapper">
-              <p className="total-label">Total</p>
+              <p className="total-label">{t("Total")}</p>
               <span className="details-total-value">
                 {formatCurrency(currentObj?.total)}
               </span>

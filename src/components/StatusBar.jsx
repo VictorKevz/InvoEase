@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DataContext } from "../App";
+import { formatWord } from "../utils/formatWord";
 function StatusBar({ obj }) {
-  const formatStatus = (status) => {
-    return status?.charAt(0)?.toUpperCase() + status?.slice(1);
-  };
+  const{t} = useContext(DataContext)
   return (
     <span className={`status ${obj?.status}`}>
       <span className={`dot ${obj?.status}`}></span>
-      {formatStatus(obj?.status)}
+      {t(formatWord(obj?.status))}
     </span>
   );
 }

@@ -5,7 +5,7 @@ import "./modal.css";
 import { Link } from "react-router-dom";
 
 function Modal({}) {
-  const { invoice, dispatchInvoice } = useContext(DataContext);
+  const { invoice, dispatchInvoice, t } = useContext(DataContext);
   const { title, message, modalId } = invoice.warningModal;
   const isDelete = title === "Confirm Deletion";
   return (
@@ -22,8 +22,8 @@ function Modal({}) {
             )}
           </span>
           <div className="modal-text-wrapper">
-            <h2 className="modal-title">{title}</h2>
-            <p className="modal-parag">{message}</p>
+            <h2 className="modal-title">{t(title)}</h2>
+            <p className="modal-parag">{t(message)}</p>
           </div>
         </header>
         <footer className="modal-footer">
@@ -32,7 +32,7 @@ function Modal({}) {
             className="btn cancel"
             onClick={() => dispatchInvoice({ type: "HIDE_WARNING_MODAL" })}
           >
-            Cancel
+            {t("Cancel")}
           </button>
           <Link
             to={isDelete ? "/portal" : `/details/${modalId}`}
@@ -44,7 +44,7 @@ function Modal({}) {
               });
             }}
           >
-            {isDelete ? "Delete" : "Mark as Paid"}
+            {isDelete ? t("Delete") : t("Mark as Paid")}
           </Link>
         </footer>
       </article>

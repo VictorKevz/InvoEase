@@ -6,10 +6,10 @@ import empty from "../assets/images/illustration-empty.svg";
 import StatusBar from "./StatusBar";
 import { useFormatCurrency } from "../hooks/useFormatCurrency";
 function InvoiceCard() {
-  const { filteredData, formatDate } = useContext(DataContext);
+  const { filteredData, formatDate,settings,t } = useContext(DataContext);
 
   const formatCurrency = useFormatCurrency();
-
+const locale = settings.locale || "en-GB";
   return (
     <>
       {filteredData?.length > 0 ? (
@@ -28,7 +28,7 @@ function InvoiceCard() {
                       {obj?.id}
                     </h2>
                     <p className="due-date">
-                      Due {formatDate(obj?.paymentDue)}
+                      {t("Due")} {formatDate(obj?.paymentDue,locale)}
                     </p>
                     <p className="total mobile">{formatCurrency(obj?.total)}</p>
                   </div>
@@ -56,8 +56,7 @@ function InvoiceCard() {
         <div className="empty-wrapper">
           <img src={empty} alt="" className="empty-img" />
           <p className="no-invoice">
-            No invoices available, select at least one filter or create new ones
-            if you haven't!
+            {t("No invoices available, select at least one filter or create new ones if you haven't!")}
           </p>
         </div>
       )}

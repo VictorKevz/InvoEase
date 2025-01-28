@@ -5,7 +5,10 @@ import { homeData } from "./homeData";
 import { Link } from "react-router-dom";
 import { AnimatePresence,motion } from "framer-motion";
 import { pageVariants } from "../../variants";
+import { useTranslation } from "react-i18next";
+
 function Home() {
+  const { t } = useTranslation();
   return (
     <AnimatePresence mode="wait">
     <motion.section 
@@ -18,13 +21,11 @@ function Home() {
       <header className="home-header">
         <div className="home-text-wrapper">
           <h1 className="home-title">
-            Simplify Your Invoices With <span className="mark">InvoEase</span>.
+            {t("Simplify Your Invoices With")} <span className="mark">InvoEase</span>.
             
           </h1>
           <p className="home-parag">
-            Experience an intuitive invoicing to streamline your workflow.
-            Create, manage, and organize invoices effortlessly, so you can focus
-            on growing your business without the hassle.
+            {t("Experience an intuitive invoicing to streamline your workflow. Create, manage, and organize invoices effortlessly, so you can focus on growing your business without the hassle.")}
           </p>
         </div>
         <figure className="home-image-wrapper">
@@ -33,16 +34,16 @@ function Home() {
       </header>
 
       <div className="home-features">
-        <h2 className="feature-title">Why InvoEase?</h2>
+        <h2 className="feature-title">{t("Why InvoEase?")}</h2>
         <div className="feature-card-wrapper">
           {homeData.map((feature) => (
             <div key={feature.id} className="feature-card">
               <span className="feature-card-icon-wrapper">
               <img src={feature.icon} className="feature-icon" />
               </span>
-              <h2 className="feature-card-title">{feature.title}</h2>
-              <p className="feature-parag">{feature.parag}</p>
-              <Link to={feature.url} className="feature-link">{feature.cta}</Link>
+              <h2 className="feature-card-title">{t(feature.title)}</h2>
+              <p className="feature-parag">{t(feature.parag)}</p>
+              <Link to={feature.url} className="feature-link">{t(feature.cta)}</Link>
             </div>
           ))}
         </div>

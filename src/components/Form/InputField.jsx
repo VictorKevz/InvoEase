@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { DataContext } from "../../App";
 import "../Form/form.css";
 import { Check } from "@mui/icons-material";
-
+import { useTranslation } from "react-i18next";
 function InputField({ field, section, id }) {
-  const { form, dispatchForm } = useContext(DataContext);
+  const { form, dispatchForm, t } = useContext(DataContext);
+  
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -25,7 +26,7 @@ function InputField({ field, section, id }) {
   const isItemsValid = currentObj?.[itemKey]?.valid;
   return (
     <label className={`form-label ${field.id}`} htmlFor={field.uniqueId}>
-      <span className={`form-label-text ${section === "items" && "hide-items-label"}`}>{field?.label}</span>
+      <span className={`form-label-text ${section === "items" && "hide-items-label"}`}>{t(field?.label)}</span>
       {field.type === "file" ? (
         <div className="custom-file-wrapper">
           <input

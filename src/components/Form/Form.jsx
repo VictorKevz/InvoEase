@@ -7,8 +7,7 @@ import FormButton from "./FormComponents/FormButton";
 import { DataContext } from "../../App";
 
 function Form() {
-  const { form, dispatchForm, dispatchInvoice, invoice } =
-    useContext(DataContext);
+  const { form, dispatchForm, dispatchInvoice, t } = useContext(DataContext);
 
   const handleSubmit = () => {
     // Check the status first to determine if the form should be saved as a draft
@@ -156,22 +155,18 @@ function Form() {
       type: "button",
     },
   };
-  useEffect(() => {
-    if (form.showForm) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [form.showForm]);
   return (
     <article className="form-wrapper">
       <form className="form-container">
         <header className="form-header">
-          <h2 className="form-main-title">New Invoice</h2>
-          <p className="form-parag">Fill out the form to create an invoice</p>
+          <h2 className="form-main-title">
+            {form.isEditing
+              ? `Edit Invoice #${form.editingObj.id}`
+              : t("New Invoice")}
+          </h2>
+          <p className="form-parag">
+            {t("Fill out the form to create an invoice")}
+          </p>
         </header>
         <div className="form-content">
           <ProfileForm />

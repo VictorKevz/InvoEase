@@ -5,19 +5,21 @@ import { Add, KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import Filters from "../../components/Filters";
 import "./portal.css";
 import InvoiceCard from "../../components/InvoiceCard";
+
+
 function Portal() {
-  const { invoice, dispatchInvoice, filteredData, form, dispatchForm } =
+  const { invoice, dispatchInvoice, filteredData, t, dispatchForm } =
     useContext(DataContext);
   const totalInvoices = filteredData?.length;
   return (
     <section className="wrapper portal">
       <header className="portal-header">
         <div className="portal-text-wrapper">
-          <h1 className="portal-title">Invoices</h1>
+          <h1 className="portal-title">{t("Invoices")}</h1>
           <p className="portal-parag desktop">{`There are ${
             totalInvoices > 0 ? totalInvoices : 0
           } total invoices`}</p>
-          <p className="portal-parag mobile">{`${ 
+          <p className="portal-parag mobile">{`${
             totalInvoices > 0 ? totalInvoices : 0
           } invoices`}</p>
         </div>
@@ -28,7 +30,7 @@ function Portal() {
               className="filter-button"
               onClick={() => dispatchInvoice({ type: "TOGGLE_STATUS" })}
             >
-              Filter<span className="filter-subtext">by status</span>
+              {t("Filter")}<span className="filter-subtext">{t("by status")}</span>
               {invoice.showStatus ? (
                 <KeyboardArrowUp className="arrow-menu" />
               ) : (
@@ -50,7 +52,7 @@ function Portal() {
             <span className="add-icon">
               <Add />
             </span>
-            New <span className="invoice-subtext"> Invoice</span>
+            {t("New")} <span className="invoice-subtext"> {t("Invoice")}</span>
           </button>
         </div>
       </header>

@@ -105,16 +105,9 @@ export const settingsData = [
       {
         id: uuidv4(),
         name: "fi",
-        text: "Finnish",
-        parag: "Use Finnish",
+        text: "Suomi",
+        parag: "Käytä suomea",
         icon: finland,
-      },
-      {
-        id: uuidv4(),
-        name: "sv",
-        text: "Swedish",
-        parag: "Use Swedish",
-        icon: sweden,
       },
     ],
   },
