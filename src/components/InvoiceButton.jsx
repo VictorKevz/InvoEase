@@ -31,6 +31,7 @@ function InvoiceButton({ data }) {
               },
             });
       }}
+      aria-label={t(data.text)}
     >
       {t(data.text)}
     </button>

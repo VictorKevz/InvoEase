@@ -1,26 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=League+Spartan:wght@100..900&display=swap");
 :root {
   /* Primary Colors */
-  --primary-color: #7c5dfa; 
-  --secondary-color: #9277ff; 
-  --dark-bg: #1e2139; 
-  --dark-alt: #252945; 
-  --nav-bg:#1e2139; 
---light-text: #f9fafe;
+  --primary-color: #7c5dfa;
+  --secondary-color: #9277ff;
+  --dark-bg: #1e2139;
+  --dark-alt: #252945;
+  --nav-bg: #1e2139;
+  --light-text: #f9fafe;
   /* Neutral Colors */
-  --neutral-light: #dfe3fa; 
-  --neutral-dark: #888eb0; 
-  --accent-purple: #7e88c3; 
-  --accent-black: #0c0e16; 
-  --white: #ffffff; 
+  --neutral-light: #dfe3fa;
+  --neutral-dark: #888eb0;
+  --accent-purple: #7e88c3;
+  --accent-black: #0c0e16;
+  --white: #ffffff;
 
   /* Accent Colors */
-  --error-red: #ec5757; 
-  --highlight-pink: #ffad9d; 
+  --error-red: #ec5757;
+  --highlight-pink: #ffad9d;
   --green: #33d69f;
   --orange: #ff8f00;
-  --light-bg: #f8f8fb; 
-  --dark-card-bg: #141625; 
+  --light-bg: #f8f8fb;
+  --dark-card-bg: #141625;
 }
 
 /* Light Theme Overrides */
@@ -34,7 +34,7 @@
   --white: #141625; /* White */
 
   /* Accent Colors */
-  --accent-black:#373B53; /* Darker Black */
+  --accent-black: #373b53; /* Darker Black */
   --error-red: #ec5757; /* Same for Error */
   --highlight-pink: #ffad9d; /* Same for Highlights */
   --light-bg: #ffffff; /* White Background */
@@ -47,7 +47,8 @@
   padding: 0;
   box-sizing: border-box;
 }
-body,html {
+body,
+html {
   background-color: var(--dark-card-bg);
   color: var(--white);
   height: 100vh;
@@ -80,17 +81,26 @@ li {
   list-style: none;
 }
 input:-webkit-autofill {
-  background-color: transparent!important;
-  color: inherit !important; 
-  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important; 
-  transition: background-color 5000s ease-in-out 0s; 
+  background-color: transparent !important;
+  color: inherit !important;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 ::-webkit-scrollbar {
-  width: .5rem!important;
+  width: 0.5rem !important;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--dark-alt)!important;
-  height: 2rem!important;
-
+  background-color: var(--dark-alt) !important;
+  height: 2rem !important;
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
 }

@@ -6,7 +6,7 @@ import "./items.css";
 import { useFormatCurrency } from "../../hooks/useFormatCurrency";
 
 function Items() {
-  const { form, dispatchForm } = useContext(DataContext);
+  const { form, dispatchForm,t } = useContext(DataContext);
   const headings = ["Item Name", "Qty", "Price", "Total"];
   const isDisabled = form?.items?.length === 1;
 
@@ -58,7 +58,7 @@ function Items() {
                 })
               }
             >
-              <Delete className="delete-icon" />
+              <Delete className="delete-icon" aria-hidden="true"/>
             </button>
           </fieldset>
         );
@@ -71,8 +71,9 @@ function Items() {
             type: "ADD_ITEMS",
           })
         }
+        aria-label={t('Add New Item')}
       >
-        <Add /> Add New Item
+        <Add aria-hidden="true" /> Add New Item
       </button>
     </div>
   );

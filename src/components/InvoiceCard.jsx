@@ -16,6 +16,8 @@ function InvoiceCard() {
     <>
       {filteredData?.length > 0 ? (
         <ul className="invoice-card-list" aria-labelledby="invoice-list">
+                    <h2 id="invoice-list" className="sr-only">{t("Invoice List")}</h2>
+
           {filteredData?.map((obj) => (
             <li key={obj?.id} className="link-item">
               <Link
@@ -23,7 +25,7 @@ function InvoiceCard() {
                 className="invoice-card"
                 aria-label={`View details for invoice ${obj?.id}`}
               >
-                <article className="invoice-card-content">
+                <article className="invoice-card-content" >
                   <div className="invoice-id-due-total-wrapper">
                     <h2 className="card-title">
                       <span className="hash-sign">#</span>

@@ -2,10 +2,8 @@ import React, { useContext } from "react";
 import { DataContext } from "../../App";
 import "../Form/form.css";
 import { Check } from "@mui/icons-material";
-import { useTranslation } from "react-i18next";
 function InputField({ field, section, id }) {
   const { form, dispatchForm, t } = useContext(DataContext);
-  
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -21,12 +19,19 @@ function InputField({ field, section, id }) {
         });
   };
   const isValid = form[section][field?.id]?.valid;
-  const currentObj = form.items.find((item) => item.id === id);
-  const itemKey = section === "items" ? field.id.split("-")[0] : undefined;
-  const isItemsValid = currentObj?.[itemKey]?.valid;
+  const itemsValid = form?.items?.every(
+    (item) => item.productName.valid && item.quantity.valid && item.price.valid
+  );
+  const isItems = section === "items";
   return (
     <label className={`form-label ${field.id}`} htmlFor={field.uniqueId}>
-      <span className={`form-label-text ${section === "items" && "hide-items-label"}`}>{t(field?.label)}</span>
+      <span
+        className={`form-label-text ${
+          section === "items" && "hide-items-label"
+        }`}
+      >
+        {t(field?.label)}
+      </span>
       {field.type === "file" ? (
         <div className="custom-file-wrapper">
           <input
@@ -36,6 +41,8 @@ function InputField({ field, section, id }) {
             onChange={handleChange}
             className="input-field file-input"
             accept="image/png, image/jpeg, image/jpg"
+            aria-invalid={!isValid}
+            aria-describedby={`${field.uniqueId}-error`}
           />
           <span
             className={`custom-file-label ${
@@ -66,8 +73,11 @@ function InputField({ field, section, id }) {
           placeholder={field.placeholder}
           onChange={handleChange}
           className={`input-field ${field.id} ${!isValid && "error-border"}  ${
-            section === "items" && "items-field"
-          } `}
+            isItems && "items-field"
+          } ${isItems && !field.valid && "error-border-items"}
+          `}
+          aria-invalid={!isValid}
+          aria-describedby={`${field.label} error`}
         />
       )}
       {!isValid && (

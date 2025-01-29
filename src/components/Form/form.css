@@ -196,6 +196,10 @@ input[type="file"]::-webkit-file-upload-button {
   position: absolute;
   right: 0;
 }
+.error-border-items{
+  border: 1px solid var(--error-red)!important;
+  background-color: rgba(241, 76, 76, 0.211)!important;;
+}
 /* ACTIVE STATES */
 .custom-file-label:not(.uploaded):hover {
   background-color: var(--primary-color);
