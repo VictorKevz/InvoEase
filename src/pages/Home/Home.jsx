@@ -29,7 +29,7 @@ function Home() {
           </p>
         </div>
         <figure className="home-image-wrapper">
-          <img src={illustration} alt="illustration" className="home-image" />
+          <img src={illustration} alt="" aria-hidden="true" className="home-image" />
         </figure>
       </header>
 
@@ -39,7 +39,7 @@ function Home() {
           {homeData.map((feature) => (
             <div key={feature.id} className="feature-card">
               <span className="feature-card-icon-wrapper">
-              <img src={feature.icon} className="feature-icon" />
+              <img src={feature.icon} className="feature-icon" alt="" aria-hidden="true" />
               </span>
               <h2 className="feature-card-title">{t(feature.title)}</h2>
               <p className="feature-parag">{t(feature.parag)}</p>

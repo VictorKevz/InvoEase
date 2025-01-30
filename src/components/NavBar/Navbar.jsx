@@ -18,7 +18,7 @@ function Navbar() {
         <img src={logo} alt="logo" className="logo-img" />
         <span className="bottom"></span>
       </NavLink>
-      <nav className="nav-wrapper" role="navigation">
+      <nav className="nav-wrapper">
         <ul className="nav-list" role="menubar">
           {navLinks.map((link, index) => (
             <li key={index} className="nav-item" role="menuitem">
@@ -30,7 +30,7 @@ function Navbar() {
                 onClick={() => {
                   form.showForm ? dispatchForm({ type: "RESET_FORM" }) : null;
                 }}
-                
+
               >
                 <span className="nav-link-text">{t(link.title)}</span>
               </NavLink>
@@ -48,7 +48,8 @@ function Navbar() {
             form.showForm ? dispatchForm({ type: "RESET_FORM" }) : null;
           }}
         >
-          <img src={avatar} className="avatar-img" />
+          <img src={avatar} className="avatar-img" alt="User avatar"  />
+          <span className="sr-only" aria-label="Go to settings page">Settings Page</span>
         </NavLink>
       </div>
     </header>
