@@ -7,7 +7,7 @@ import "./navbar.css";
 import { DataContext } from "../../App";
 
 function Navbar() {
-  const { dispatchForm, form } = useContext(DataContext);
+  const { dispatchForm, form,t } = useContext(DataContext);
   const navLinks = [
     { title: "Home", path: "/", icon: Home },
     { title: "Portal", path: "/portal", icon: Receipt },
@@ -18,10 +18,10 @@ function Navbar() {
         <img src={logo} alt="logo" className="logo-img" />
         <span className="bottom"></span>
       </NavLink>
-      <nav className="nav-wrapper">
-        <ul className="nav-list">
+      <nav className="nav-wrapper" role="navigation">
+        <ul className="nav-list" role="menubar">
           {navLinks.map((link, index) => (
-            <li key={index} className="nav-item">
+            <li key={index} className="nav-item" role="menuitem">
               <NavLink
                 to={link.path}
                 className={({ isActive }) =>
@@ -30,8 +30,9 @@ function Navbar() {
                 onClick={() => {
                   form.showForm ? dispatchForm({ type: "RESET_FORM" }) : null;
                 }}
+                
               >
-                <span className="nav-link-text">{link.title}</span>
+                <span className="nav-link-text">{t(link.title)}</span>
               </NavLink>
             </li>
           ))}

@@ -1,6 +1,6 @@
 
 # InvoEase
-
+![home-page-screenshot](public/screenshots/home-page.png)
 InvoEase is a comprehensive invoicing application designed to streamline the process of creating, managing, and tracking invoices. The application provides a user-friendly interface for managing client and company information, generating invoices, and tracking payment statuses.
 
 ## Table of Contents
@@ -53,7 +53,7 @@ To get started with InvoEase, follow these steps:
    ```
 
 ## Usage
-
+![settings-page-screenshot](public/screenshots/tablet-settings.png)
 1. **Navigate to the application**:
    Open your browser and go to `http://localhost:3000`.
 
@@ -70,7 +70,7 @@ To get started with InvoEase, follow these steps:
    Change the language from the settings page.
 
 ## Technologies Used
-
+![details-page-screenshot](public/screenshots/details-page.png)
 - **React**: JavaScript library for building user interfaces.
 - **Framer Motion**: Library for animations.
 - **i18next**: Internationalization framework.
@@ -135,9 +135,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ```
 
 ### Summary
-
-- **Features**: Lists the main features of the application.
-- **Installation**: Provides step-by-step instructions for setting up the project.
+ **Installation**: Provides step-by-step instructions for setting up the project.
 - **Usage**: Explains how to use the application.
 - **Technologies Used**: Lists the main technologies used in the project.
 - **Project Structure**: Provides an overview of the project's directory structure.

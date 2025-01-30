@@ -50,6 +50,7 @@
   "Discard": "Hylkää",
   "Cancel": "Peruuta",
   "Save & Send": "Tallenna ja lähetä",
+  "Save as Draft": "Tallenna luonnoksena",
   "Confirm Deletion": "Vahvista poisto",
   "deleteInvoiceConfirmation": "Oletko varma, että haluat poistaa laskun #{{id}}? Tätä toimintoa ei voi peruuttaa.",
   "markPaidInvoiceConfirmation": "Oletko varma, että haluat merkitä laskun #{{id}} maksetuksi? Tätä toimintoa ei voi peruuttaa.",
@@ -87,7 +88,9 @@
   "Address": "Osoite",
   "City": "Kaupunki",
   "Country": "Maa",
-  "Post Code": "Postinumero"
+  "Post Code": "Postinumero",
+  "Home": "Koti",
+  "Portal": "Portaali"
 
 
 

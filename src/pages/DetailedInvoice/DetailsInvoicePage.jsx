@@ -50,7 +50,8 @@ function DetailsInvoicePage() {
 
   const reactToPrintFn = useReactToPrint({ contentRef });
   const formatCurrency = useFormatCurrency();
-  const locale = settings.locale || "en-GB";
+  const language = settings.language;
+  const locale = language === "en" ? "en-GB" : settings.locale;
 
   return (
     <motion.div 
