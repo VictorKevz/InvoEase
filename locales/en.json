@@ -50,6 +50,7 @@
   "Discard": "Discard",
   "Cancel": "Cancel",
   "Save & Send": "Save & Send",
+  "Save as Draft": "Save as Draft",
   "Confirm Deletion": "Confirm Deletion",
   "deleteInvoiceConfirmation": "Are you sure you want to delete invoice #{{id}}? This action cannot be undone!",
   "markPaidInvoiceConfirmation": "Are you sure you want to mark invoice #{{id}} as paid? This action cannot be undone!",
@@ -90,6 +91,8 @@
   "Phone": "Phone",
   "Address": "Address",
   "City": "City",
-  "Post Code": "Post Code"
+  "Post Code": "Post Code",
+  "Home": "Home",
+  "Portal": "Portal"
 
 }
